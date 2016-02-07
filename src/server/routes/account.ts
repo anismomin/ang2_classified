@@ -61,9 +61,9 @@ router
 				email: user.email,
 				admin: user.admin,
 				status: user.status
-			}
+			};
 
-			res.json({ success: true, message: 'Successfully loged In!'});
+			res.json({ success: true, message: 'Successfully loged In!', user: passUser });
 
 			// if (user.admin) {
 			// 	req.flash("info", "Welcome Admin !");
