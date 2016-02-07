@@ -1,33 +1,45 @@
+import {Component} from 'angular2/core'
+import {RouteConfig, ROUTER_DIRECTIVES} from 'angular2/router'
 
-import {Component, bind} from 'angular2/core';
-import {ROUTER_PROVIDERS, RouterOutlet, RouteConfig, RouterLink, Location} from 'angular2/router';
-
-import {LocationStrategy, HashLocationStrategy} from 'angular2/router';
-
-import { Todo } from './todo/todo';
-import { About } from './about/about';
+import {HomeComponent} from './home/home.component'
+import {SignInComponent} from './signin/signin.component'
+import {PostsComponent} from './posts/posts.component'
+import {CreatePostComponent} from './createPost/createPost.component'
 
 @Component({
-	selector: 'my-app',
-	templateUrl: 'app/components/app.html',
-	directives: [RouterOutlet, RouterLink]
+    selector: 'clasified',
+    templateUrl: 'app/components/app.html',
+    directives: [HomeComponent, SignInComponent, ROUTER_DIRECTIVES]
 })
 @RouteConfig([
-	{ path: '/', component: Todo, as: 'Home' },
-	{ path: '/about/:id', component: About, as: 'About' }
+	{ path: '/home', name: 'Home', component: HomeComponent},
+	{ path: '/posts', name: 'Posts', component: PostsComponent},
+	{ path: '/', name: 'CreatePost', component: CreatePostComponent, useAsDefault: true },
+		
 ])
-export class AppComponent {
-    
-    location: Location;
+export class ClassifiedApp {
 
-    constructor(location: Location) {
-        this.location = location;
-    }
+	public signInUpActive = null;
 
-    isActive(path) {
-        return this.location.path() === path;
-    }
+	constructor(){
 
- 
-    
+	}
+
+	signInModal() {
+		this.signInUpActive = true;
+		return;
+	}
+
+	signUpModal() {
+		this.signInUpActive = false;
+		return;
+	}
+
+	closeSignInUpModal(value) {
+		this.signInUpActive = null;
+	}
+
+
+
+
 }

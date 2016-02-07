@@ -33,15 +33,14 @@ import account = require('./routes/account');
 import postingRoute = require('./routes/posting');
 import adminRoute = require('./routes/admin');
 
-app.use(account);
+
 
 // =======================
 // Configration ============
 // =======================
-
+//app.use(express.static('built/client'));
 app.use('/client', express.static(path.join(__dirname, '/../client')));
 app.use('/uploads', express.static(path.join(__dirname, '/../uploads')));
-app.use('/bower_components', express.static(path.join(__dirname, '/../bower_components')));
 app.use(bodyParser.urlencoded({ extended: false}));
 app.use(bodyParser.json());
 app.use(cookieParser());
@@ -75,13 +74,33 @@ function onlyAdmin(req, res, next) {
 // Routes ============
 // =======================
 // Simple Routes
-app.get('/', function(req, res) {
-	res.sendfile(path.resolve(__dirname, '../client/index.html'));
-});
+
+
+// app.use(function(req, res, next) {
+// 	res.header("Access-Control-Allow-Origin", "*");
+// 	res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+// 	next();
+// });
+
+var allowCrossDomain = function(req, res, next) {
+    if ('OPTIONS' == req.method) {
+		res.header('Access-Control-Allow-Origin', '*');
+		res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,PATCH,OPTIONS');
+		res.header('Access-Control-Allow-Headers', 'Origin, Content-Type, Authorization, Content-Length, X-Requested-With');
+		res.send(200);
+    }
+    else {
+		next();
+    }
+};
+
+app.use(allowCrossDomain);
+
+app.use(account);
 app.use('api/v1/posting', postingRoute);
 app.use('api/v1/admin', onlyAdmin, adminRoute);
 
-app.use(express.static('built/client'));
+
 // Simple Routes
 
 // =======================

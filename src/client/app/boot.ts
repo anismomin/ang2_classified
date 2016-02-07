@@ -1,11 +1,10 @@
 import {bootstrap} from 'angular2/platform/browser';
-import {bind} from 'angular2/core';
-import {ROUTER_PROVIDERS, LocationStrategy, HashLocationStrategy} from 'angular2/router';
-import {AppComponent} from './components/app';
+import {ROUTER_PROVIDERS} from 'angular2/router';
 import {HTTP_PROVIDERS} from 'angular2/http'
 
-bootstrap(AppComponent, [
+import {ClassifiedApp} from './components/app';
+
+bootstrap(ClassifiedApp, [
 	ROUTER_PROVIDERS,
-	HTTP_PROVIDERS,
-	bind(LocationStrategy).toClass(HashLocationStrategy)
+	HTTP_PROVIDERS
 ]);

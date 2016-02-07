@@ -2,6 +2,7 @@
 
 import express = require('express');
 import bodyParser = require('body-parser');
+import path = require('path');
 
 import session = require('express-session');
 var crypto = require('crypto');
@@ -36,11 +37,13 @@ router
 	saveUninitialized: true
 }))
 .use(flash())
-.get('/login', (req, res) => {
+.get('/', (req, res) => {
 	
-	let vm = { title: 'Login' , test : 5 };
+	// let vm = { title: 'Login' , test : 5 };
 
-	res.render('signin', vm);
+	// res.render('signin', vm);
+
+	res.sendfile(path.resolve(__dirname, '../../client/index.html'));
 
 }).post('/', (req: express.Request, res: express.Response, next) => {
 	
@@ -48,6 +51,7 @@ router
 		email: req.body.email.toLowerCase(),
 		password: hash(req.body.password)
 	};
+
 
 	User.findOne(userdata, function(err, user) {
 		
@@ -104,6 +108,8 @@ router
 
 		var b = req.body;
 		
+		console.log(b);
+
 		if (b.password !== b.cpassword) {
 			
 			// var vm = {
