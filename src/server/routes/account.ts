@@ -38,20 +38,15 @@ router
 }))
 .use(flash())
 .get('/', (req, res) => {
-	
-	// let vm = { title: 'Login' , test : 5 };
-
-	// res.render('signin', vm);
 
 	res.sendfile(path.resolve(__dirname, '../../client/index.html'));
 
 }).post('/', (req: express.Request, res: express.Response, next) => {
 	
 	let userdata = {
-		email: req.body.email.toLowerCase(),
+		email: req.body.email,
 		password: hash(req.body.password)
 	};
-
 
 	User.findOne(userdata, function(err, user) {
 		
@@ -68,7 +63,7 @@ router
 				status: user.status
 			}
 
-			res.json({ success: true, message: 'Successfully loged In!', user: passUser });
+			res.json({ success: true, message: 'Successfully loged In!'});
 
 			// if (user.admin) {
 			// 	req.flash("info", "Welcome Admin !");
@@ -79,14 +74,6 @@ router
 			// }
 
 		} else {
-			
-			// var vm = {
-			// 	title: 'Login',
-			// 	input: req.body,
-			// 	error: new Error('Credentials not match with record!')
-			// };
-
-			// res.render('signin', vm);
 
 			res.json({ success: false, message: 'Failed to login!', error: 'Credentials not match with record!' });
 
@@ -112,16 +99,10 @@ router
 
 		if (b.password !== b.cpassword) {
 			
-			// var vm = {
-			// 	title: 'Register',
-			// 	input: req.body,
-			// 	error: new Error('The passwords do not match')
-			// };
-
 			res.json({ success: false, message: 'The passwords do not match' });
-			//res.render('signup', vm);
 		
 		} else {
+
 			User.findOne({ username: b.username.toLowerCase() }, function(err, user) {
 
 				if(!user) {
@@ -177,12 +158,14 @@ router
 
 
 				} else {
+
 					res.json({ success: false, message: 'The Username is already in exist.' });					
-				}
+				};
+			
 			}
 
 			
-		}
+		};
 
 		
 

@@ -13,9 +13,9 @@ export class SignInUpService {
 	login(creds) {
 		var params = JSON.stringify(creds);
 		var headers = new Headers();
-		headers.append('content-type', 'application/json');
+		headers.append('Content-Type', 'application/x-www-form-urlencoded');
 
-		return this.http.post('http://localhost:3100', params, {
+		return this.http.post('http://localhost:3000', params, {
 			headers: headers
 		})
 		.map(res => res.json());
@@ -24,9 +24,9 @@ export class SignInUpService {
 	register(creds) {
 		var params = JSON.stringify(creds);
 		var headers = new Headers();
-		headers.append('Content-Type', 'application/json');
+		headers.append('Content-Type', 'application/x-www-form-urlencoded');
 
-		return this.http.post('http://localhost:3100/register', params, {
+		return this.http.post('http://localhost:3000/register', params, {
 			headers: headers
 		})
 		.map(res => res.json());

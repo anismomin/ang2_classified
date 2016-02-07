@@ -42,11 +42,11 @@ export class SignInComponent {
 
 	login(email, password){
 		
-		var creds = {
+		
+		var creds = JSON.stringify({
 			email: email.value,
 			password: password.value
-		};
-
+		});
 
 		this._loginservice.login(creds)
 			.subscribe(

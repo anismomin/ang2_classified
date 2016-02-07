@@ -75,11 +75,11 @@ gulp.watch(config.devServerTs, ['nodemon', 'bs_reload']);
 
 // CLIENT
 gulp.task('ts_lint', function() {
-    return gulp.src(config.clientTs)
-        .pipe(tslint())
-        .pipe(tslint.report('prose', {
-            emitError: false
-        }));
+    // return gulp.src(config.clientTs)
+    //     .pipe(tslint())
+    //     .pipe(tslint.report('prose', {
+    //         emitError: false
+    //     }));
 })
 
 /*
@@ -183,7 +183,7 @@ gulp.task('serve', ['nodemon', 'ts_lint', 'build_index', 'build_app'], function(
 	
     browserSync({
         // informs browser-sync to proxy our expressjs app which would run at the following location
-        proxy: 'http://localhost:3100',
+        proxy: 'http://localhost:3000',
         // informs browser-sync to use the following port for the proxied app
         // notice that the default port is 3000, which would clash with our expressjs
         port: 4000,
