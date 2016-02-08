@@ -20,6 +20,7 @@ import {CreatePostComponent} from './createPost/createPost.component'
 export class ClassifiedApp {
 
 	public signInUpActive = null;
+	public accountDropDownActive = false;
 
 	constructor(){
 
@@ -39,6 +40,9 @@ export class ClassifiedApp {
 		this.signInUpActive = null;
 	}
 
+	openAcountDropDown($event) {
+		this.accountDropDownActive = !this.accountDropDownActive;	
+	}
 
 
 

@@ -42,7 +42,6 @@ export class SignInComponent {
 
 	login(email, password){
 		
-		
 		var creds = JSON.stringify({
 			email: email.value,
 			password: password.value
