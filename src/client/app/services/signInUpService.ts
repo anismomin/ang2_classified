@@ -11,23 +11,26 @@ export class SignInUpService {
 
 
 	login(creds) {
-		var params = JSON.stringify(creds);
+	
+		let creds = "username=" + creds.username + "&password=" + creds.password;
 		
 		var headers = new Headers();
 		headers.append('Content-Type', 'application/x-www-form-urlencoded');
 
-		return this.http.post('http://localhost:5000/signin', params, {
+		return this.http.post('http://localhost:3000/user/login', creds, {
 			headers: headers
 		})
 		.map(res => res.json());
 	}
 
 	register(creds) {
-		var params = JSON.stringify(creds);
+
+		let creds = "username=" + creds.username + "&email=" + creds.email + "&password=" + creds.password;
+
 		var headers = new Headers();
 		headers.append('Content-Type', 'application/x-www-form-urlencoded');
 
-		return this.http.post('http://localhost:3000/register', params, {
+		return this.http.post('http://localhost:3000/user/register', creds , {
 			headers: headers
 		})
 		.map(res => res.json());

@@ -17,6 +17,7 @@ export class SignInComponent {
 	public loginResponse;
 	public registerResponse;
 	public postResponse;
+	public loggedIn = false;
 
 	constructor(private http: Http, private _loginservice: SignInUpService) {
 
@@ -40,38 +41,43 @@ export class SignInComponent {
 		return;
 	}
 
-	login(email, password){
+	login(loginusername, password) {
 		
-		var creds = JSON.stringify({
-			email: email.value,
+		let logincreds = {
+			username: loginusername.value,
 			password: password.value
-		});
+		};
 
-		this._loginservice.login(creds)
+		this._loginservice.login(logincreds)
 			.subscribe(
 				data => this.loginResponse = JSON.stringify(data),
 				error => this.logError(error),
-				() => console.log('FINISH')
+				() => {
+					this.loggedIn = true;
+					this.signInUpModal = null;
+					console.log(this.loginResponse);
+				}
 			);
 	}
 
-	register(username, regEmail, regPassword, cPassword) {
+	register(username, regEmail, regPassword) {
 
-		var creds = {
+		let creds = {
 			username: username.value,
 			email: regEmail.value,
 			password: regPassword.value
 		};
 
-		if (creds.password != cPassword.value) {
-			alert('password not matched.');
-		}	
 
 		this._loginservice.register(creds)
 			.subscribe(
-				data => this.loginResponse = JSON.stringify(data),
+				data => this.registerResponse = JSON.stringify(data),
 				error => this.logError(error),
-				() => console.log('FINISH')
+				() => {
+					this.loggedIn = true;
+					this.signInUpModal = null;
+					console.log(this.registerResponse);
+				}
 			);
 	}
 

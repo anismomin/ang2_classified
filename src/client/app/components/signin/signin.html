@@ -1,8 +1,4 @@
-
-
 <div class="cd-user-modal" [class.is-visible]="signInUpModal != null" (click)="closeSignInUpModal($event)"> <!-- this is the entire modal form, including the background -->
-
-
 
 	<div class="cd-user-modal-container"> <!-- this is the container wrapper -->
 		<ul class="cd-switcher">
@@ -17,15 +13,14 @@
 
 			<form class="cd-form">
 				<p class="fieldset">
-					<label class="image-replace cd-email" for="signin-email">E-mail</label>
-					<input class="full-width has-padding has-border" id="signin-email" type="email" placeholder="E-mail" #email>
+					<label class="image-replace cd-email" for="signin-username">Username</label>
+					<input class="full-width has-padding has-border" id="signin-username" type="text" #loginusername placeholder="Username" >
 					<span class="cd-error-message">Error message here!</span>
 				</p>
 
 				<p class="fieldset">
 					<label class="image-replace cd-password" for="signin-password">Password</label>
 					<input class="full-width has-padding has-border" id="signin-password" type="text"  placeholder="Password" #password>
-					<a href="#0" class="hide-password">Hide</a>
 					<span class="cd-error-message">Error message here!</span>
 				</p>
 
@@ -35,7 +30,8 @@
 				</p>
 				
 				<p class="fieldset">
-					<input class="full-width" type="submit" value="Login" (click)="login(email, password)">
+					<button class="full-width" type="submit" (click)="login(loginusername, password)">Login</button>
+					
 				</p>
 			</form>
 			
@@ -65,19 +61,12 @@
 				</p>
 
 				<p class="fieldset">
-					<label class="image-replace cd-password" for="signup-cpassword">Confirm Password</label>
-					<input class="full-width has-padding has-border" id="signup-cpassword" type="text"  placeholder="Confirm Password" #cPassword>
-					<a href="#0" class="hide-password">Hide</a>
-					<span class="cd-error-message">Error message here!</span>
-				</p>
-
-				<p class="fieldset">
 					<input type="checkbox" id="accept-terms">
 					<label for="accept-terms">I agree to the <a href="#0">Terms</a></label>
 				</p>
 
 				<p class="fieldset">
-					<input class="full-width has-padding" type="submit" value="Create account"(click)="register(username, regEmail, regPassword, cPassword)" >
+					<button class="full-width has-padding" type="submit" (click)="register(username, regEmail, regPassword)">Create account</button>
 				</p>
 			</form>
 
