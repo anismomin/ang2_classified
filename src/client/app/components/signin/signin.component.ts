@@ -1,6 +1,7 @@
 import {Component, EventEmitter} from 'angular2/core'
 import {Http, Headers, HTTP_PROVIDERS}  from 'angular2/http'
 import {SignInUpService} from '../../services/SignInUpService'
+import {ControlGroup, FormBuilder, Validators} from 'angular2/common'
 
 @Component({
 	selector: 'signin-up',
@@ -14,13 +15,28 @@ export class SignInComponent {
 
 	public signInUpModal;
 	public closeSignInUp = new EventEmitter();
+	
+	public logInStatus = false;
+	public loginForm: ControlGroup;
+	public registerForm: ControlGroup;
+
 	public loginResponse;
 	public registerResponse;
 	public postResponse;
-	public loggedIn = false;
 
-	constructor(private http: Http, private _loginservice: SignInUpService) {
 
+	constructor(private _http: Http, private _loginservice: SignInUpService, private _formBuilder: FormBuilder) {
+		
+		this.loginForm = this._formBuilder.group({
+			'loginUsername' : ['', Validators.required],
+			'loginPassword': ['', Validators.required]
+		});
+
+		this.registerForm = this._formBuilder.group({
+			'registerUsername': ['', Validators.required],
+			'registerEmail': ['', Validators.required],
+			'registerPassword': ['', Validators.required]
+		});
 	}
 
 	closeSignInUpModal($event, value) {
@@ -41,40 +57,40 @@ export class SignInComponent {
 		return;
 	}
 
-	login(loginusername, password) {
+	login(loginData) {
 		
 		let logincreds = {
-			username: loginusername.value,
-			password: password.value
+			username: loginData.loginUsername,
+			password: loginData.loginPassword
 		};
-
+		
 		this._loginservice.login(logincreds)
 			.subscribe(
 				data => this.loginResponse = JSON.stringify(data),
 				error => this.logError(error),
 				() => {
-					this.loggedIn = true;
+					this.logInStatus = true;
 					this.signInUpModal = null;
+
 					console.log(this.loginResponse);
 				}
 			);
 	}
 
-	register(username, regEmail, regPassword) {
+	register(registerData) {
 
 		let creds = {
-			username: username.value,
-			email: regEmail.value,
-			password: regPassword.value
+			username: registerData.registerUsername,
+			email: registerData.registerEmail,
+			password: registerData.registerPassword
 		};
-
 
 		this._loginservice.register(creds)
 			.subscribe(
 				data => this.registerResponse = JSON.stringify(data),
 				error => this.logError(error),
 				() => {
-					this.loggedIn = true;
+					this.logInStatus = true;
 					this.signInUpModal = null;
 					console.log(this.registerResponse);
 				}
@@ -90,8 +106,6 @@ export class SignInComponent {
 			);
 	}
 	
-
-
 	logError(error) {
 		console.log(error);
 	}

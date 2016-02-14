@@ -80,6 +80,9 @@ app.get('/', function(req, res) {
 });
 
 // error hndlers
+interface Error {
+    status?: number;
+}
 app.use(function(req, res, next) {
     var err = new Error('Not Found');
     err.status = 404;
@@ -105,7 +108,7 @@ var server = http.createServer(app);
 
 server.listen(app.get('port'), 'localhost');
 server.on('listening', function() {
-	console.log('Express server started on port %s at %s', server.address().port, server.address().address);
+	debug('Express server started on port %s at %s', server.address().port, server.address().address);
 });
 
 /*var server = app.listen(app.get('port'), function() {

@@ -136,7 +136,7 @@
 		}
 	}
 
-	input {
+	input , button {
 		margin: 0;
 		padding: 0;
 		@include border-radius;
@@ -160,7 +160,7 @@
 			}
 		}
 
-		&.has-error {
+		&.has-error, &.ng-invalid {
 			border: 1px solid $red;
 		}
 
@@ -200,8 +200,8 @@
 	.cd-error-message {
 		display: inline-block;
 		position: absolute;
-		left: -5px;
-		bottom: -35px;
+		left: 1px;
+		bottom: -30px;
 		background: rgba($red, .9);
 		padding: .8em;
 		z-index: 2;
@@ -212,10 +212,18 @@
 		/* prevent click and touch events */
 		pointer-events: none;
 
-		visibility: hidden;
-		opacity: 0;
+		// visibility: hidden;
+		// opacity: 0;
+	
+		// @include transition(opacity .2s 0, visibility 0 .2s);
+		
 
-		@include transition(opacity .2s 0, visibility 0 .2s);
+		/* Edit for ng if condition */
+		// opacity: 1;
+		// visibility: visible;
+
+		//@include transition(opacity .2s 0, visibility 0 0);
+
 
 		&::after {
 			/* triangle */

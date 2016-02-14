@@ -10,27 +10,27 @@ export class SignInUpService {
 	constructor(public http: Http) { }
 
 
-	login(creds) {
+	login(loginCreds) {
 	
-		let creds = "username=" + creds.username + "&password=" + creds.password;
+		let login = "username=" + loginCreds.username + "&password=" + loginCreds.password;
 		
 		var headers = new Headers();
 		headers.append('Content-Type', 'application/x-www-form-urlencoded');
 
-		return this.http.post('http://localhost:3000/user/login', creds, {
+		return this.http.post('http://localhost:3000/user/login', login, {
 			headers: headers
 		})
 		.map(res => res.json());
 	}
 
-	register(creds) {
+	register(regCreds) {
 
-		let creds = "username=" + creds.username + "&email=" + creds.email + "&password=" + creds.password;
+		let register = "username=" + regCreds.username + "&email=" + regCreds.email + "&password=" + regCreds.password;
 
 		var headers = new Headers();
 		headers.append('Content-Type', 'application/x-www-form-urlencoded');
 
-		return this.http.post('http://localhost:3000/user/register', creds , {
+		return this.http.post('http://localhost:3000/user/register', register, {
 			headers: headers
 		})
 		.map(res => res.json());

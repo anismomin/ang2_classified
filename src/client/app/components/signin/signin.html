@@ -11,17 +11,18 @@
 			<!-- <button (click)="getpost()">Test Get Request </button>
 			<p>{{postResponse}}</p> -->
 
-			<form class="cd-form">
+			<form class="cd-form" [ngFormModel]="loginForm" (ngSubmit)="login(loginForm.value)">
 				<p class="fieldset">
 					<label class="image-replace cd-email" for="signin-username">Username</label>
-					<input class="full-width has-padding has-border" id="signin-username" type="text" #loginusername placeholder="Username" >
-					<span class="cd-error-message">Error message here!</span>
+					<input class="full-width has-padding has-border" id="signin-username" type="text" [ngFormControl]="loginForm.controls['loginUsername']" #loginUsername placeholder="Username" >
+					<span class="cd-error-message" *ngIf="!loginUsername.valid && loginUsername.dirty" >Username is Required!</span>
 				</p>
 
 				<p class="fieldset">
 					<label class="image-replace cd-password" for="signin-password">Password</label>
-					<input class="full-width has-padding has-border" id="signin-password" type="text"  placeholder="Password" #password>
-					<span class="cd-error-message">Error message here!</span>
+					<input class="full-width has-padding has-border" id="signin-password" type="text"  placeholder="Password" [ngFormControl]="loginForm.controls['loginPassword']" 
+					#loginPassword>
+					<span class="cd-error-message" *ngIf="!loginPassword.valid && loginPassword.dirty">password is Required</span>
 				</p>
 
 				<p class="fieldset">
@@ -30,7 +31,7 @@
 				</p>
 				
 				<p class="fieldset">
-					<button class="full-width" type="submit" (click)="login(loginusername, password)">Login</button>
+					<button class="full-width" type="submit" [disabled]="!loginForm.valid" >Login</button>
 					
 				</p>
 			</form>
@@ -40,22 +41,22 @@
 		</div> <!-- cd-login -->
 
 		<div id="cd-signup" [class.is-selected]="!signInUpModal"> <!-- sign up form -->
-			<form class="cd-form">
+			<form class="cd-form" [ngFormModel]="registerForm" (ngSubmit)="register(registerForm.value)">
 				<p class="fieldset">
 					<label class="image-replace cd-username" for="signup-username">Username</label>
-					<input class="full-width has-padding has-border" id="signup-username" type="text" placeholder="Username" #username>
-					<span class="cd-error-message">Error message here!</span>
+					<input class="full-width has-padding has-border" id="signup-username" type="text" placeholder="Username" [ngFormControl]="registerForm.controls['registerUsername']">
+					<span class="cd-error-message" *ngIf="!registerForm.controls['registerUsername'].valid">Error message here!</span>
 				</p>
 
 				<p class="fieldset">
 					<label class="image-replace cd-email" for="signup-email">E-mail</label>
-					<input class="full-width has-padding has-border" id="signup-email" type="email" placeholder="E-mail" #regEmail>
+					<input class="full-width has-padding has-border" id="signup-email" type="email" placeholder="E-mail" [ngFormControl]="registerForm.controls['registerEmail']">
 					<span class="cd-error-message">Error message here!</span>
 				</p>
 
 				<p class="fieldset">
 					<label class="image-replace cd-password" for="signup-password">Password</label>
-					<input class="full-width has-padding has-border" id="signup-password" type="text"  placeholder="Password" #regPassword>
+					<input class="full-width has-padding has-border" id="signup-password" type="text"  placeholder="Password" [ngFormControl]="registerForm.controls['registerPassword']">
 					<a href="#0" class="hide-password">Hide</a>
 					<span class="cd-error-message">Error message here!</span>
 				</p>
@@ -66,7 +67,7 @@
 				</p>
 
 				<p class="fieldset">
-					<button class="full-width has-padding" type="submit" (click)="register(username, regEmail, regPassword)">Create account</button>
+					<button class="full-width has-padding" type="submit">Create account</button>
 				</p>
 			</form>
 
