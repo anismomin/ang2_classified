@@ -13,9 +13,9 @@
         <ul class="cd-top-nav">
             <li><a href="#0">Tour</a></li>
             <li><a href="#0">Support</a></li>
-            <li><a (click)="signInModal()">Sign in</a></li>
-            <li><a (click)="signUpModal()" >Sign up</a></li>
-            <li class="has-children account" [class.selected]="accountDropDownActive" (click)="openAcountDropDown($event)">
+            <li *ngIf="!logInStatus"><a (click)="signInModal()">Sign in</a></li>
+            <li *ngIf="!logInStatus" ><a (click)="signUpModal()" >Sign up</a></li>
+            <li *ngIf="logInStatus" class="has-children account" [class.selected]="accountDropDownActive" (click)="openAcountDropDown($event)">
                 <a href="#0">
                     <img src="assets/images/cd-avatar.png" alt="avatar">
                     Account
@@ -23,7 +23,7 @@
                 <ul>
                     <li><a href="#0">My Account</a></li>
                     <li><a href="#0">Edit Account</a></li>
-                    <li><a href="#0">Logout</a></li>
+                    <li><a (click)="logOut()">Logout</a></li>
                 </ul>
             </li>
         </ul>
@@ -110,5 +110,5 @@
         <router-outlet></router-outlet>
      
     </div> <!-- .content-wrapper -->
-    <signin-up [signInUpModal]="signInUpActive" (closeSignInUp)="closeSignInUpModal($event, value)"></signin-up>
+    <signin-up [signInUpModal]="signInUpActive" (closeSignInUp)="closeSignInUpModal($event, value)"  (loginStatusEvent)="upateLoginStatus($event, value)"></signin-up>
 </main> <!-- .cd-main-content -->

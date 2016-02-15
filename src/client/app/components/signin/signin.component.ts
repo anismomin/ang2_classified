@@ -7,7 +7,7 @@ import {ControlGroup, FormBuilder, Validators} from 'angular2/common'
 	selector: 'signin-up',
     templateUrl: 'app/components/signin/signin.html',
     inputs : ['signInUpModal'],
-    outputs: ['closeSignInUp'],
+    outputs: ['closeSignInUp', 'loginStatusEvent'],
     providers:[SignInUpService]
 
 })
@@ -15,7 +15,9 @@ export class SignInComponent {
 
 	public signInUpModal;
 	public closeSignInUp = new EventEmitter();
+	public loginStatusEvent = new EventEmitter();
 	
+
 	public logInStatus = false;
 	public loginForm: ControlGroup;
 	public registerForm: ControlGroup;
@@ -37,6 +39,7 @@ export class SignInComponent {
 			'registerEmail': ['', Validators.required],
 			'registerPassword': ['', Validators.required]
 		});
+		
 	}
 
 	closeSignInUpModal($event, value) {
@@ -47,15 +50,6 @@ export class SignInComponent {
 		}
 	}
 
-	showSignIn(){
-		this.signInUpModal = true;
-		return;
-	}
-
-	showSignUp(){
-		this.signInUpModal = false; 
-		return;
-	}
 
 	login(loginData) {
 		
@@ -71,7 +65,7 @@ export class SignInComponent {
 				() => {
 					this.logInStatus = true;
 					this.signInUpModal = null;
-
+					this.loginStatusEvent.emit(true);
 					console.log(this.loginResponse);
 				}
 			);
