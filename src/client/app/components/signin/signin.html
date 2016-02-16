@@ -14,9 +14,17 @@
 			<form class="cd-form" [ngFormModel]="loginForm" (ngSubmit)="login(loginForm.value)">
 				<p class="fieldset">
 					<label class="image-replace cd-email" for="signin-username">Username</label>
-					<input class="full-width has-padding has-border" id="signin-username" type="text" [ngFormControl]="loginForm.controls['loginUsername']" #loginUsername placeholder="Username" >
-					<span class="cd-error-message" *ngIf="!loginUsername.valid && loginUsername.dirty" >Username is Required!</span>
+					<input class="full-width has-padding has-border" id="signin-username" type="text" [ngFormControl]="loginForm.controls['loginUsername']" #username placeholder="Username" >
+
 				</p>
+
+					<p *ngIf="username.pending">Fetching data from the server...</p>
+			
+			<div *ngIf="username.dirty && !username.valid && !username.pending">
+			  <p *ngIf="username.errors.required">Username is required.</p>
+			  <p *ngIf="username.errors.startsWithNumber">Your username can't start with a number</p>
+			  <p *ngIf="username.errors.usernameTaken">This username is taken</p>
+			</div>
 
 				<p class="fieldset">
 					<label class="image-replace cd-password" for="signin-password">Password</label>
@@ -44,8 +52,8 @@
 			<form class="cd-form" [ngFormModel]="registerForm" (ngSubmit)="register(registerForm.value)">
 				<p class="fieldset">
 					<label class="image-replace cd-username" for="signup-username">Username</label>
-					<input class="full-width has-padding has-border" id="signup-username" type="text" placeholder="Username" [ngFormControl]="registerForm.controls['registerUsername']">
-					<span class="cd-error-message" *ngIf="!registerForm.controls['registerUsername'].valid">Error message here!</span>
+					<input class="full-width has-padding has-border" id="signup-username" type="email" placeholder="Username" [ngFormControl]="registerForm.controls['registerUsername']">
+					<span class="cd-error-message" [class.is-visible]="!registerForm.controls['registerUsername'].valid && registerForm.controls['registerUsername'].dirty">Error message here!</span>
 				</p>
 
 				<p class="fieldset">

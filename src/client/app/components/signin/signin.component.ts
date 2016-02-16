@@ -1,14 +1,16 @@
 import {Component, EventEmitter} from 'angular2/core'
 import {Http, Headers, HTTP_PROVIDERS}  from 'angular2/http'
 import {SignInUpService} from '../../services/SignInUpService'
-import {ControlGroup, FormBuilder, Validators} from 'angular2/common'
+import {ControlGroup, FormBuilder, Validators, FORM_DIRECTIVES} from 'angular2/common'
+import { UsernameValidator } from './usernameValidator'
 
 @Component({
 	selector: 'signin-up',
     templateUrl: 'app/components/signin/signin.html',
     inputs : ['signInUpModal'],
     outputs: ['closeSignInUp', 'loginStatusEvent'],
-    providers:[SignInUpService]
+    providers:[SignInUpService],
+    directives: [FORM_DIRECTIVES]
 
 })
 export class SignInComponent {
@@ -29,7 +31,10 @@ export class SignInComponent {
 	constructor(private _http: Http, private _loginservice: SignInUpService, private _formBuilder: FormBuilder) {
 		
 		this.loginForm = this._formBuilder.group({
-			'loginUsername' : ['', Validators.required],
+			'loginUsername': ['', 
+				Validators.compose([Validators.required, UsernameValidator.startsWithNumber]),
+				UsernameValidator.usernameTaken
+			],
 			'loginPassword': ['', Validators.required]
 		});
 

@@ -212,18 +212,13 @@
 		/* prevent click and touch events */
 		pointer-events: none;
 
-		// visibility: hidden;
-		// opacity: 0;
+		visibility: hidden;
+		opacity: 0;
 	
-		// @include transition(opacity .2s 0, visibility 0 .2s);
+		@include transition(opacity .2s 0, visibility 0 .2s);
 		
 
-		/* Edit for ng if condition */
-		// opacity: 1;
-		// visibility: visible;
-
-		//@include transition(opacity .2s 0, visibility 0 0);
-
+		
 
 		&::after {
 			/* triangle */
