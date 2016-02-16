@@ -208,8 +208,15 @@ Top Navigation
 		display: none;
 	}
 
+
+	> li > a {
+		
+		line-height:1.9em;
+	}
+
 	> li a {
 		padding: 1em 5% !important;
+		
 	}
 
 	img {

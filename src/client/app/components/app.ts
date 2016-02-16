@@ -20,18 +20,16 @@ import {SignInUpService} from '../services/SignInUpService'
 ])
 export class ClassifiedApp {
 
-	public signInUpActive = null;
-	public logInStatus = false;
+	public signInUpActive : any = null;
+	public logInStatus : boolean = false;
 
-	public accountDropDownActive = false;
+	public accountDropDownActive : boolean = false;
 
 	constructor(private _loginservice: SignInUpService) {
 
 	}
 
 	signInModal() {
-		console.log(this.logInStatus);
-		console.log(this.signInUpActive);
 		if (!this.logInStatus) {
 			this.signInUpActive = true;
 		}

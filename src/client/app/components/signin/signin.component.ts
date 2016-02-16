@@ -13,18 +13,17 @@ import {ControlGroup, FormBuilder, Validators} from 'angular2/common'
 })
 export class SignInComponent {
 
-	public signInUpModal;
-	public closeSignInUp = new EventEmitter();
-	public loginStatusEvent = new EventEmitter();
+	public signInUpModal : any;
+	public closeSignInUp : EventEmitter<any> = new EventEmitter();
+	public loginStatusEvent: EventEmitter<any>  = new EventEmitter();
 	
-
-	public logInStatus = false;
+	public logInStatus : boolean = false;
 	public loginForm: ControlGroup;
 	public registerForm: ControlGroup;
 
-	public loginResponse;
-	public registerResponse;
-	public postResponse;
+	public loginResponse : string;
+	public registerResponse: string;
+	public postResponse: string;
 
 
 	constructor(private _http: Http, private _loginservice: SignInUpService, private _formBuilder: FormBuilder) {
@@ -42,6 +41,7 @@ export class SignInComponent {
 		
 	}
 
+	//Close Sign in Tab
 	closeSignInUpModal($event, value) {
 		if ($event.target.classList.contains('cd-user-modal')) {
 			//this.signInUpModal = null;	
@@ -50,7 +50,18 @@ export class SignInComponent {
 		}
 	}
 
+	//Sign In Tabs
+	showSignIn() {
+		this.signInUpModal = true;
+		return;
+	}		
+ 	//Sign In Tabs
+	showSignUp(){		
+		this.signInUpModal = false;
+		return;
+	}
 
+	// Make Login Http Request
 	login(loginData) {
 		
 		let logincreds = {
@@ -71,6 +82,7 @@ export class SignInComponent {
 			);
 	}
 
+	// Make Register Http Request
 	register(registerData) {
 
 		let creds = {
