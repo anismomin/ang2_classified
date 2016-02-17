@@ -99,6 +99,18 @@
 		&:last-child {
 			margin-bottom: 0;
 		}
+
+		&.has-error {
+			input {
+				border: 1px solid $red;	
+			}
+		}
+
+		&.has-success {
+			input {
+				border: 1px solid green;	
+			}
+		}
 	}
 
 	label {
@@ -160,9 +172,7 @@
 			}
 		}
 
-		&.has-error, &.ng-invalid {
-			border: 1px solid $red;
-		}
+		
 
 		&[type=password] { 
 			/* space left for the HIDE button */
@@ -212,13 +222,16 @@
 		/* prevent click and touch events */
 		pointer-events: none;
 
-		visibility: hidden;
-		opacity: 0;
+		// visibility: hidden;
+		// opacity: 0;
 	
-		@include transition(opacity .2s 0, visibility 0 .2s);
+		// @include transition(opacity .2s 0, visibility 0 .2s);
 		
 
-		
+		opacity: 1;
+			visibility: visible;
+
+			@include transition(opacity .2s 0, visibility 0 0);
 
 		&::after {
 			/* triangle */

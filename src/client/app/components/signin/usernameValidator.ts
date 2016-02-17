@@ -19,7 +19,7 @@ export class UsernameValidator {
 
     return new Promise((resolve, reject) => {
       setTimeout(() => {
-        if (control.value === "David") {
+        if (control.value === "anismomin") {
           resolve({ "usernameTaken": true })
         } else {
           resolve(null);
@@ -27,6 +27,19 @@ export class UsernameValidator {
 
       }, 1000);
     });
+
+  }
+}
+
+export class EmailValidator {
+
+  static validEmail(control: Control): ValidationResult {
+
+    var EMAIL_REGEXP = /^[a-z0-9!#$%&'*+\/=?^_`{|}~.-]+@[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)*$/i;
+
+    if (control.value != "" && !EMAIL_REGEXP.test(control.value)) {
+      return { "invalidEmail": true };
+    }
 
   }
 }

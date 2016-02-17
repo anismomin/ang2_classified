@@ -1,0 +1,1 @@
+{"version":3,"file":"models.js","sourceRoot":"","sources":["models.ts"],"names":["TodoItem","TodoItem.constructor"],"mappings":";;;;;YAAA;gBACEA,kBAAmBA,IAAYA,EAASA,SAAkBA;oBAAvCC,SAAIA,GAAJA,IAAIA,CAAQA;oBAASA,cAASA,GAATA,SAASA,CAASA;gBAC1DA,CAACA;gBACHD,eAACA;YAADA,CAACA,AAHD,IAGC;YAHD,+BAGC,CAAA"}
