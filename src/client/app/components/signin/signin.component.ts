@@ -1,20 +1,21 @@
 import {Component, EventEmitter} from 'angular2/core'
 import {Http, Headers, HTTP_PROVIDERS}  from 'angular2/http'
-import {SignInUpService} from '../../services/SignInUpService'
-import {ControlGroup, FormBuilder, Control, Validators, FORM_DIRECTIVES} from 'angular2/common'
-import { UsernameValidator } from './usernameValidator'
-import { EmailValidator } from './emailValidator'
 
-import { ValidationService } from '../../services/ValidationService'
-	
+import {ControlGroup, FormBuilder, Validators, FORM_DIRECTIVES} from 'angular2/common'
+
+
+
+import {SignInUpService} from '../../services/SignInUpService'
+import {ControlMessages} from '../controlMessage/control-messages.component'
+import {ValidationService} from '../../services/validationService'
+
 @Component({
 	selector: 'signin-up',
     templateUrl: 'app/components/signin/signin.html',
     inputs : ['signInUpModal'],
     outputs: ['closeSignInUp', 'loginStatusEvent'],
-    providers: [SignInUpService, FormBuilder],
-    directives: [FORM_DIRECTIVES]
-
+    providers: [SignInUpService],
+    directives: [FORM_DIRECTIVES, ControlMessages]
 })
 export class SignInComponent {
 
@@ -24,22 +25,16 @@ export class SignInComponent {
 	
 	logInStatus : boolean = false;
 
-	fb: FormBuilder
 	loginForm: ControlGroup;
-	loginUsername: Control;
-	loginPassword: Control;
-
 	registerForm: ControlGroup;
-	registerUsername: Control;
-	registerPassword: Control;
-	registerEmail: Control;
+
 
 	loginResponse : string;
 	registerResponse: string;
 	postResponse: string;
 
 
-	constructor(private _http: Http, private _loginservice: SignInUpService, fb: FormBuilder) {
+	constructor(private _http: Http, private _loginservice: SignInUpService, private fb: FormBuilder) {
 		this.fb = fb;
 		this.buildLoginForm();
 		this.buildRegisterForm();
@@ -47,13 +42,9 @@ export class SignInComponent {
 
 
 	buildLoginForm() :void {
-
-		this.loginUsername = new Control('', Validators.required);
-		this.loginPassword = new Control('', Validators.required);
-
 		this.loginForm = this.fb.group({
-			'loginUsername': this.loginUsername,
-			'loginPassword': this.loginPassword
+			'loginUsername': ['', Validators.compose([Validators.required, ValidationService.startsWithNumber])],
+			'loginPassword': ['', Validators.compose([Validators.required, ValidationService.passwordValidator])]
 		});
 	}
 
@@ -62,16 +53,10 @@ export class SignInComponent {
     }
 
 	buildRegisterForm(): void {
-
-		this.registerUsername = new Control('', Validators.compose([Validators.required, UsernameValidator.startsWithNumber]),
-			UsernameValidator.usernameTaken);
-		this.registerEmail = new Control('', Validators.required);
-		this.registerPassword = new Control('', Validators.required);
-
 		this.registerForm = this.fb.group({
-			'registerUsername': this.registerUsername,
-			'registerEmail': this.registerEmail,
-			'registerPassword': this.registerPassword
+			'registerUsername': ['', Validators.compose([Validators.required, ValidationService.startsWithNumber]), ValidationService.usernameTaken],
+			'registerEmail': ['', Validators.compose([Validators.required, ValidationService.emailValidator])],
+			'registerPassword': ['', Validators.compose([Validators.required, ValidationService.passwordValidator])],
 		});
 	}
 

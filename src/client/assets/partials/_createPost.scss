@@ -50,7 +50,8 @@ Form
 	}
 
 	input[type="text"], 
-	input[type="email"], 
+	input[type="email"],
+	input[type="file"], 
 	textarea, 
 	select,
 	legend {
@@ -61,7 +62,8 @@ Form
 	}
 
 	input[type="text"], 
-	input[type="email"], 
+	input[type="email"],
+	input[type="file"], 
 	textarea, 
 	select {
 		/* general style for input elements */
@@ -77,6 +79,8 @@ Form
 			box-shadow: 0 0 5px rgba($color-2, .2);
 		}
 	}
+
+	
 
 	.cd-select {
 		/* select element wapper */

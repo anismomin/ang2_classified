@@ -2,11 +2,10 @@ import {Component, Host} from 'angular2/core';
 import {NgFormModel} from 'angular2/common';
 import {ValidationService} from '../../services/validationService';
 
-
 @Component({
     selector: 'control-messages',
     inputs: ['controlName: control'],
-    template: `<div *ngIf="errorMessage !== null">{{errorMessage}}</div>`
+    template: `<div class="cd-error-message" *ngIf="errorMessage !== null">{{errorMessage}}</div>`
 })
 export class ControlMessages {
     controlName: string;

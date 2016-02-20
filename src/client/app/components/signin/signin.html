@@ -12,19 +12,15 @@
 			<p>{{postResponse}}</p> -->
 
 			<form class="cd-form" [ngFormModel]="loginForm" (ngSubmit)="login(loginForm.value)">
-				<p class="fieldset"	
-				[class.has-error]="!loginUsername.valid && loginUsername.dirty"
-        		[class.has-success]="loginUsername.valid && loginUsername.dirty">
+				<p class="fieldset">
 					<label class="image-replace cd-email" for="signin-username">Username</label>
-					<input class="full-width has-padding has-border" id="signin-username" type="text" [ngFormControl]="loginUsername" placeholder="Username" >
-					<span class="cd-error-message" *ngIf="!loginUsername.valid && loginUsername.dirty">password is Required</span>
+					<input class="full-width has-padding has-border" id="signin-username" type="text" ngControl="loginUsername" placeholder="Username" >
+					<control-messages control="loginUsername"></control-messages>
 				</p>
-				<p class="fieldset" 
-				[class.has-error]="!loginPassword.valid && loginPassword.dirty"
-        		[class.has-success]="loginPassword.valid && loginPassword.dirty">
+				<p class="fieldset">
 					<label class="image-replace cd-password" for="signin-password">Password</label>
-					<input class="full-width has-padding has-border" id="signin-password" type="text"  placeholder="Password" [ngFormControl]="loginPassword" >
-					<span class="cd-error-message" *ngIf="!loginPassword.valid && loginPassword.dirty">password is Required</span>
+					<input class="full-width has-padding has-border" id="signin-password" type="text"  placeholder="Password" ngControl="loginPassword" >
+					<control-messages control="loginPassword"></control-messages>
 				</p>
 
 				<p class="fieldset">
@@ -43,36 +39,24 @@
 
 		<div id="cd-signup" [class.is-selected]="!signInUpModal"> <!-- sign up form -->
 			<form class="cd-form" novalidate [ngFormModel]="registerForm" (ngSubmit)="register(registerForm.value)">
-				<p class="fieldset" 
-				[class.has-error]="!registerUsername.valid && registerUsername.dirty"
-        		>
+				<p class="fieldset">
 					<label class="image-replace cd-username" for="signup-username">Username</label>
-					<input class="full-width has-padding has-border" id="signup-username" type="text" placeholder="Username" [ngFormControl]="registerUsername">
-					<span class="cd-error-message" *ngIf="!registerUsername.valid && registerUsername.dirty">Username is Required!</span>
+					<input class="full-width has-padding has-border" id="signup-username" type="text" placeholder="Username" ngControl="registerUsername">
+					<control-messages control="registerUsername"></control-messages>
 				</p>
-
-				<p *ngIf="registerUsername.pending">...</p>
-			
-				<div *ngIf="registerUsername.dirty && !registerUsername.valid && !registerUsername.pending">
-				  <p *ngIf="registerUsername.errors.required">Username is required.</p>
-				  <p *ngIf="registerUsername.errors.startsWithNumber">Your username can't start with a number</p>
-				  <p *ngIf="registerUsername.errors.usernameTaken">This username is taken</p>
-				</div>
 
 				<p class="fieldset">
 					<label class="image-replace cd-email" for="signup-email">E-mail</label>
-					<input class="full-width has-padding has-border" id="signup-email" type="email" placeholder="E-mail" [ngFormControl]="registerEmail">
-					<span class="cd-error-message" *ngIf="!registerEmail.valid && registerEmail.dirty">Required Email Address!</span>
+					<input class="full-width has-padding has-border" id="signup-email" type="email" placeholder="E-mail" ngControl="registerEmail">
+					<control-messages control="registerEmail"></control-messages>
 				</p>
 				
 
-				<p class="fieldset"
-				[class.has-error]="!registerPassword.valid && registerPassword.dirty"
-        		[class.has-success]="registerPassword.valid && registerPassword.dirty">
+				<p class="fieldset">
 					<label class="image-replace cd-password" for="signup-password">Password</label>
-					<input class="full-width has-padding has-border" id="signup-password" type="text"  placeholder="Password" [ngFormControl]="registerPassword">
+					<input class="full-width has-padding has-border" id="signup-password" type="text"  placeholder="Password" ngControl="registerPassword">
 					<a href="#0" class="hide-password">Hide</a>
-					<span class="cd-error-message" *ngIf="!registerPassword.valid && registerPassword.dirty">Password Field is Required!</span>
+					<control-messages control="registerPassword"></control-messages>
 				</p>
 
 				<p class="fieldset">
