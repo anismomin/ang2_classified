@@ -2,7 +2,7 @@
 // reference TDS files ============
 // =======================
 
-/// <reference path='../typings/tsd.d.ts' />
+/// <reference path='../../typings/tsd.d.ts' />
 
 
 // =======================
@@ -22,7 +22,8 @@ var express = require('express'),
     localStrategy = require('passport-local').Strategy,
     debug = require('debug')('passport-mongo');
 
-
+    import passportConf from './auth/authConfig';
+    import restrict from './auth/restrict';
 // =======================
 // Configration ============
 // =======================
@@ -31,13 +32,14 @@ var express = require('express'),
 mongoose.connect('mongodb://localhost:27017/ang2_exp');
 
 // user schema/model
-var User = require('./models/user.js');
+//var User = require('./models/user/user.js');
 
 // create instance of express
 var app = express();
 
 // require routes
-var account = require('./routes/api.js');
+var account = require('./routes/account.js');
+var post = require('./routes/posting.js');
 
 // define middleware
 app.use(express.static(path.join(__dirname, '/../client')));
@@ -56,11 +58,11 @@ app.use(passport.session());
 app.use(express.static(path.join(__dirname, 'public')));
 
 // configure passport
-passport.use(new localStrategy(User.authenticate()));
-passport.serializeUser(User.serializeUser());
-passport.deserializeUser(User.deserializeUser());
+// passport.use(new localStrategy(User.authenticate()));
+// passport.serializeUser(User.serializeUser());
+// passport.deserializeUser(User.deserializeUser());
 
-
+passportConf();
 
 app.use(function(req, res, next) {
 	res.header("Access-Control-Allow-Origin", "*");
@@ -74,6 +76,7 @@ app.use(function(req, res, next) {
 // =======================
 
 app.use('/user/', account);
+app.use('/post/', post);
 
 app.get('/', function(req, res) {
 	res.sendFile(path.join(__dirname, '../client', 'index.html'));

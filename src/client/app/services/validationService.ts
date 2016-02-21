@@ -7,7 +7,7 @@ export class ValidationService {
 
     static getValidatorErrorMessage(code: string) {
         let config = {
-            'required': 'Required',
+            'required': 'Field is Required',
             'invalidCreditCard': 'Is invalid credit card number',
             'invalidEmailAddress': 'Invalid email address',
             'invalidPassword': 'Invalid password. Password must be at least 6 characters long, and contain a number.',

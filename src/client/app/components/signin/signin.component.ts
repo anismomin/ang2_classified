@@ -1,7 +1,7 @@
 import {Component, EventEmitter} from 'angular2/core'
 import {Http, Headers, HTTP_PROVIDERS}  from 'angular2/http'
 
-import {ControlGroup, FormBuilder, Validators, FORM_DIRECTIVES} from 'angular2/common'
+import {ControlGroup, FormBuilder, Control, Validators, FORM_DIRECTIVES, AbstractControl} from 'angular2/common'
 
 
 
@@ -27,7 +27,7 @@ export class SignInComponent {
 
 	loginForm: ControlGroup;
 	registerForm: ControlGroup;
-
+	loginUsername: AbstractControl;
 
 	loginResponse : string;
 	registerResponse: string;
@@ -37,13 +37,14 @@ export class SignInComponent {
 	constructor(private _http: Http, private _loginservice: SignInUpService, private fb: FormBuilder) {
 		this.fb = fb;
 		this.buildLoginForm();
-		this.buildRegisterForm();
+		this.buildRegisterForm();	
 	}
 
 
 	buildLoginForm() :void {
+		this.loginUsername = new Control('', Validators.compose([Validators.required, ValidationService.startsWithNumber]));
 		this.loginForm = this.fb.group({
-			'loginUsername': ['', Validators.compose([Validators.required, ValidationService.startsWithNumber])],
+			'loginUsername': this.loginUsername,
 			'loginPassword': ['', Validators.compose([Validators.required, ValidationService.passwordValidator])]
 		});
 	}
@@ -86,7 +87,7 @@ export class SignInComponent {
 
 	// Make Login Http Request
 	login(loginData) {
-		
+			
 		if (this.loginForm.dirty && this.loginForm.valid) {
 			let logincreds = {
 				username: loginData.loginUsername,
@@ -101,6 +102,10 @@ export class SignInComponent {
 					this.logInStatus = true;
 					this.signInUpModal = null;
 					this.loginStatusEvent.emit(true);
+					
+					this.loginUsername = this.loginForm.controls['loginUsername'];
+					this.loginUsername.updateValueAndValidity("");
+
 					console.log(this.loginResponse);
 				}
 				);
@@ -124,6 +129,8 @@ export class SignInComponent {
 				() => {
 					this.logInStatus = true;
 					this.signInUpModal = null;
+					this.loginStatusEvent.emit(true);
+					
 					console.log(this.registerResponse);
 				}
 				);

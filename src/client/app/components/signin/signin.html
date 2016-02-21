@@ -13,13 +13,13 @@
 
 			<form class="cd-form" [ngFormModel]="loginForm" (ngSubmit)="login(loginForm.value)">
 				<p class="fieldset">
-					<label class="image-replace cd-email" for="signin-username">Username</label>
+					<label class="image-replace cd-username" for="signin-username">Username</label>
 					<input class="full-width has-padding has-border" id="signin-username" type="text" ngControl="loginUsername" placeholder="Username" >
 					<control-messages control="loginUsername"></control-messages>
 				</p>
 				<p class="fieldset">
 					<label class="image-replace cd-password" for="signin-password">Password</label>
-					<input class="full-width has-padding has-border" id="signin-password" type="text"  placeholder="Password" ngControl="loginPassword" >
+					<input class="full-width has-padding has-border" id="signin-password" type="password"  placeholder="Password" ngControl="loginPassword" >
 					<control-messages control="loginPassword"></control-messages>
 				</p>
 
@@ -54,7 +54,7 @@
 
 				<p class="fieldset">
 					<label class="image-replace cd-password" for="signup-password">Password</label>
-					<input class="full-width has-padding has-border" id="signup-password" type="text"  placeholder="Password" ngControl="registerPassword">
+					<input class="full-width has-padding has-border" id="signup-password" type="password"  placeholder="Password" ngControl="registerPassword">
 					<a href="#0" class="hide-password">Hide</a>
 					<control-messages control="registerPassword"></control-messages>
 				</p>

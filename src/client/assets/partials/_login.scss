@@ -172,8 +172,6 @@
 			}
 		}
 
-		
-
 		&[type=password] { 
 			/* space left for the HIDE button */
 			padding-right: 65px; 
@@ -192,6 +190,20 @@
 				background: lighten($color-2, 5%);
 				outline: none;
 			}
+
+
+		}
+
+		&:disabled {
+			background: lighten($color-2, 25%);
+			outline: none;
+
+			.no-touch &:hover, .no-touch &:focus {
+				background: lighten($color-2, 25%);
+				outline: none;
+				cursor: not-allowed;
+			}
+
 		}
 	}
 
