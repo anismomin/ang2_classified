@@ -31,7 +31,7 @@ export class ValidationService {
 
         return new Promise((resolve, reject) => {
             setTimeout(() => {
-                if (control.value === "anismomin") {
+                if (control.value === "anismomin1") {
                     resolve({ "usernameTaken": true })
                 } else {
                     resolve(null);

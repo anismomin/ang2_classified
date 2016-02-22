@@ -1,23 +1,45 @@
-/// <reference path='../../../typings/tsd.d.ts' />
+/// <reference path='../../typings/tsd.d.ts' />
 
 var express = require('express'),
     router = express.Router(),
-    passport = require('passport');
-    User = require('../models/user/user.js');
+    passport = require('passport'),
+    path = require('path');
 
-router.post('/register', function(req, res) {
+var passport = require('passport');
+import userService = require('../services/userService');
+    
 
-  User.register(new User({ username: req.body.username, email: req.body.email  }), req.body.password, function(err, account) {
+router
+.get('/', function(req, res) {
+  res.sendFile(path.join(__dirname, '../client', 'index.html'));
+
+})
+.get('/home', function(req, res) {
+
+  res.sendFile(path.join(__dirname, '../client', 'index.html'));
+})
+.post('/user/register', function(req, res) {
+  
+  let userData = req.body;
+
+  userService.addUser(userData, function(err, user){
     if (err) {
-      return res.status(500).json({err: err});
+      return res.status(500).json({ err: err });
     }
-    passport.authenticate('local')(req, res, function () {
-      return res.status(200).json({status: 'Registration successful!'});
+    passport.authenticate('local')(req, res, function() {
+      return res.status(200).json({ status: 'Registration successful!' });
     });
   });
-});
-
-router.post('/login', function(req, res, next) {
+  // User.register(new User({ username: req.body.username, email: req.body.email  }), req.body.password, function(err, account) {
+  //   if (err) {
+  //     return res.status(500).json({err: err});
+  //   }
+  //   passport.authenticate('local')(req, res, function () {
+  //     return res.status(200).json({status: 'Registration successful!'});
+  //   });
+  // });
+})
+.post('/user/login', function(req, res, next) {
 
   passport.authenticate('local', function(err, user, info) {
     if (err) {
@@ -33,9 +55,8 @@ router.post('/login', function(req, res, next) {
       res.status(200).json({status: 'Login successful!'});
     });
   })(req, res, next);
-});
 
-router.get('/logout', function(req, res) {
+}).get('user/logout', function(req, res) {
   req.logout();
   res.status(200).json({status: 'Bye!'});
 });

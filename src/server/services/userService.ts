@@ -1,4 +1,4 @@
-import {IUserModel, User} from '../models/users/User';
+import {IUserModel, User} from '../models/user/User';
 
 export let addUser = function(user, next) {
 	var newUser = new User({

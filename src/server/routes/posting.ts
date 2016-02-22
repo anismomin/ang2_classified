@@ -1,4 +1,4 @@
-/// <reference path='../../../typings/tsd.d.ts' />
+/// <reference path='../../typings/tsd.d.ts' />
 
 import express = require('express');
 import path = require('path');
@@ -8,19 +8,19 @@ var crypto = require('crypto');
 var router = express.Router();
 
 
-import {IUserModel, User} from '../models/users/User';
+import {IUserModel, User} from '../models/user/User';
 import {IPostingModel, Posting} from '../models/post/Posting';
 
 
-var storage = multer.diskStorage({
-	destination: '../../../uploads/',
-	filename: function(req, file, cb) {
-		crypto.pseudoRandomBytes(16, function(err, raw) {
-			if (err) return cb(err)
-			cb(null, raw.toString('hex') + path.extname(file.originalname))
-		})
-	}
-});
+// var storage = multer.diskStorage({
+// 	destination: '../../../uploads/',
+// 	filename: function(req, file, cb) {
+// 		crypto.pseudoRandomBytes(16, function(err, raw) {
+// 			if (err) return cb(err)
+// 			cb(null, raw.toString('hex') + path.extname(file.originalname))
+// 		})
+// 	}
+// });
 
 router.use(methodOverride(function(req, res) {
 	if (req.body && typeof req.body === 'object' && '_method' in req.body) {
@@ -50,29 +50,31 @@ router.get('/', (req: express.Request, res: express.Response) => {
 // 	res.render('postings/create', vm);
 
 // })
-.post('/create', upload.array('images', 12), (req: express.Request, res: express.Response, next) => {
+//.post('/create', upload.array('images', 12), (req: express.Request, res: express.Response, next) => {
+	
+.post('/create',  (req: express.Request, res: express.Response, next) => {
 	
 
 	let b = req.body;
 	//var images = req.files;
 	var imgArray = [];
 	
-	var images = [{
-		path: './images/image.jpg',
-		filename: 'banana'
-	},
-	{
-		path: './images/image2.jpg',
-		filename: 'banana2'
-	}];
+	// var images = [{
+	// 	path: './images/image.jpg',
+	// 	filename: 'banana'
+	// },
+	// {
+	// 	path: './images/image2.jpg',
+	// 	filename: 'banana2'
+	// }];
 
 
-	images.forEach(function(file) {
-		imgArray.push({
-			path: file.path,
-			filename: file.filename
-		});
-	});
+	// images.forEach(function(file) {
+	// 	imgArray.push({
+	// 		path: file.path,
+	// 		filename: file.filename
+	// 	});
+	// });
 
 
 	var userId = '';

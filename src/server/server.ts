@@ -2,8 +2,7 @@
 // reference TDS files ============
 // =======================
 
-/// <reference path='../../typings/tsd.d.ts' />
-
+/// <reference path='../typings/tsd.d.ts' />
 
 // =======================
 // get the packages we need ============
@@ -28,12 +27,6 @@ var express = require('express'),
 // Configration ============
 // =======================
 
-// mongoose
-mongoose.connect('mongodb://localhost:27017/ang2_exp');
-
-// user schema/model
-//var User = require('./models/user/user.js');
-
 // create instance of express
 var app = express();
 
@@ -55,7 +48,6 @@ app.use(require('express-session')({
 }));
 app.use(passport.initialize());
 app.use(passport.session());
-app.use(express.static(path.join(__dirname, 'public')));
 
 // configure passport
 // passport.use(new localStrategy(User.authenticate()));
@@ -70,17 +62,12 @@ app.use(function(req, res, next) {
 	next();
 });
 
-
 // =======================
 // Routes ============
 // =======================
-
-app.use('/user/', account);
+app.use('/', account);
 app.use('/post/', post);
 
-app.get('/', function(req, res) {
-	res.sendFile(path.join(__dirname, '../client', 'index.html'));
-});
 
 // error hndlers
 interface Error {
@@ -88,7 +75,7 @@ interface Error {
 }
 app.use(function(req, res, next) {
     var err = new Error('Not Found');
-    err.status = 404;
+    //err.status = 404;
     next(err);
 });
 
@@ -105,21 +92,12 @@ app.use(function(err, req, res) {
 // =======================
 
 app.set('port', (process.env.PORT || 3000));
-
 var server = http.createServer(app);
-
-
 server.listen(app.get('port'), 'localhost');
 server.on('listening', function() {
 	debug('Express server started on port %s at %s', server.address().port, server.address().address);
 });
 
-/*var server = app.listen(app.get('port'), function() {
-	debug('Express server started on port %s at %s', server.address().port, server.address().address);
-});
-
-
-*/
 
 
 

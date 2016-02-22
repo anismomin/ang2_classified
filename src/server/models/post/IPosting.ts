@@ -1,4 +1,9 @@
+interface IPostingImages {
+	path: string;
+}
+
 interface IPosting {
+	user_id: string,
 	title: string;
 	price: number;
 	category: string;
@@ -8,10 +13,7 @@ interface IPosting {
 	phone: number;
 	state: string;
 	city: string;
-}
-
-export interface IPostingImages {
-	path: string;
+	status: boolean;
 }
 
 export default IPosting;
