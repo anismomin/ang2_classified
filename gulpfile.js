@@ -26,6 +26,16 @@ gulp.task('delete_server', function(){
     return del(config.builtServer)
 });
 
+gulp.task('delete_junk_files', function(){
+    return del([
+        './src/server/**/*.js',
+        './src/server/*.js',
+        './src/server/*.js.map',
+        './src/server/**/*.js.map',
+    ]);
+});
+
+
 gulp.task('build_server', function () {
     var tsProject = tsc.createProject(config.serverConf);    
     var tsResult = gulp.src(config.devServerTs)
@@ -210,7 +220,7 @@ gulp.task('clean_build', function(callback){
 */
 
 //gulp.task('default', ['build_sass','build_html','serve'], function () {
-gulp.task('default', ['clean_build'], function () {
+gulp.task('default', ['clean_build', 'delete_junk_files'], function () {
     gulp.watch(config.clientTs,   ['build_app', browserSync.reload]);
     gulp.watch(config.clientScss,  ['build_sass']);
     gulp.watch(config.clientCompScss,  ['build_comp_sass']);

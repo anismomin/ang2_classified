@@ -3,8 +3,6 @@ import {Http, Headers, HTTP_PROVIDERS}  from 'angular2/http'
 
 import {ControlGroup, FormBuilder, Control, Validators, FORM_DIRECTIVES, AbstractControl} from 'angular2/common'
 
-
-
 import {SignInUpService} from '../../services/SignInUpService'
 import {ControlMessages} from '../controlMessage/control-messages.component'
 import {ValidationService} from '../../services/validationService'
@@ -32,6 +30,9 @@ export class SignInComponent {
 	loginResponse : string;
 	registerResponse: string;
 	postResponse: string;
+
+	loginFormProcess: boolean = false;
+	registerFormProcess: boolean = false;
 
 
 	constructor(private _http: Http, private _loginservice: SignInUpService, private fb: FormBuilder) {
@@ -94,6 +95,8 @@ export class SignInComponent {
 				password: loginData.loginPassword
 			};
 
+			//this.loginFormProcess = true;
+
 			this._loginservice.login(logincreds)
 				.subscribe(
 				data => this.loginResponse = JSON.stringify(data),
@@ -102,9 +105,10 @@ export class SignInComponent {
 					this.logInStatus = true;
 					this.signInUpModal = null;
 					this.loginStatusEvent.emit(true);
-					
-					this.loginUsername = this.loginForm.controls['loginUsername'];
-					this.loginUsername.updateValueAndValidity("");
+					//this.loginFormProcess = false;
+
+					/*this.loginUsername = this.loginForm.controls['loginUsername'];
+					this.loginUsername.updateValueAndValidity("");*/
 
 					console.log(this.loginResponse);
 				}
@@ -122,6 +126,8 @@ export class SignInComponent {
 				password: registerData.registerPassword
 			};
 
+			this.registerFormProcess = true;
+
 			this._loginservice.register(creds)
 				.subscribe(
 				data => this.registerResponse = JSON.stringify(data),
@@ -130,7 +136,8 @@ export class SignInComponent {
 					this.logInStatus = true;
 					this.signInUpModal = null;
 					this.loginStatusEvent.emit(true);
-					
+					this.registerFormProcess = false;
+
 					console.log(this.registerResponse);
 				}
 				);

@@ -12,13 +12,11 @@ import userService = require('../services/userService');
 router
 .get('/', function(req, res) {
   res.sendFile(path.join(__dirname, '../client', 'index.html'));
-
 })
-.get('/home', function(req, res) {
-
+.get('home', function(req, res) {
   res.sendFile(path.join(__dirname, '../client', 'index.html'));
 })
-.post('/user/register', function(req, res) {
+.post('user/register', function(req, res) {
   
   let userData = req.body;
 
@@ -39,7 +37,7 @@ router
   //   });
   // });
 })
-.post('/user/login', function(req, res, next) {
+.post('user/login', function(req, res, next) {
 
   passport.authenticate('local', function(err, user, info) {
     if (err) {

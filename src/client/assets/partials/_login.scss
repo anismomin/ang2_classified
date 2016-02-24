@@ -172,6 +172,18 @@
 			}
 		}
 
+		&.btnLoading {
+			background: 'fff';
+			outline: none;
+
+			.no-touch &:hover, .no-touch &:focus {
+				background: 'fff';
+				outline: none;
+				cursor: not-allowed;
+			}
+
+		}
+
 		&[type=password] { 
 			/* space left for the HIDE button */
 			padding-right: 65px; 
@@ -205,6 +217,9 @@
 			}
 
 		}
+
+
+		
 	}
 
 	.hide-password {
