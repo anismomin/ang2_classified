@@ -95,7 +95,7 @@ export class SignInComponent {
 				password: loginData.loginPassword
 			};
 
-			//this.loginFormProcess = true;
+			this.loginFormProcess = true;
 
 			this._loginservice.login(logincreds)
 				.subscribe(
@@ -105,7 +105,7 @@ export class SignInComponent {
 					this.logInStatus = true;
 					this.signInUpModal = null;
 					this.loginStatusEvent.emit(true);
-					//this.loginFormProcess = false;
+					this.loginFormProcess = false;
 
 					/*this.loginUsername = this.loginForm.controls['loginUsername'];
 					this.loginUsername.updateValueAndValidity("");*/

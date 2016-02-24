@@ -1,6 +1,11 @@
 import {Injectable} from 'angular2/core'
 import { Http, Headers, Response } from 'angular2/http';
-import 'rxjs/add/operator/map'
+
+//Grab everything with import 'rxjs/Rx';
+import {Observable} from 'rxjs/Observable';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/catch';
+
 
 @Injectable()
 export class SignInUpService {
@@ -20,7 +25,8 @@ export class SignInUpService {
 		return this.http.post('http://localhost:3000/user/login', login, {
 			headers: headers
 		})
-		.map(res => res.json());
+		.map(res => res.json())
+		.catch(this.handleError);;
 	}
 
 	register(regCreds) {
@@ -33,21 +39,28 @@ export class SignInUpService {
 		return this.http.post('http://localhost:3000/user/register', register, {
 			headers: headers
 		})
-		.map(res => res.json());
+		.map(res => res.json())
+		.catch(this.handleError);
 
 	}
 
 	logOut() {
 		return this.http.get('http://localhost:3000/user/logout')
-			.map(res => res.json());
+			.map(res => res.json())
+			.catch(this.handleError);
 	}
 
 
 	getpost() {
 		return this.http.get('http://jsonplaceholder.typicode.com/posts/1')
-			.map(res => res.json());
+			.map(res => res.json())
+			.catch(this.handleError);
 	}
 
+	handleError(error: any) {
+        console.error(error);
+        return Observable.throw(error.json().error || 'Server error');
+    }
 
 
 }
