@@ -71,6 +71,8 @@ export class SignInComponent {
 		if ($event.target.classList.contains('cd-user-modal')) {
 			//this.signInUpModal = null;	
 			this.closeSignInUp.emit(value);
+            this.buildLoginForm();
+		    this.buildRegisterForm();
 			return;
 		}
 	}
@@ -111,6 +113,9 @@ export class SignInComponent {
 					this.loginUsername.updateValueAndValidity("");*/
 
 					console.log(this.loginResponse);
+                    
+                    this.buildLoginForm();
+		            this.buildRegisterForm();
 				}
 				);
 		}
@@ -139,6 +144,9 @@ export class SignInComponent {
 					this.registerFormProcess = false;
 
 					console.log(this.registerResponse);
+                    
+                    this.buildLoginForm();
+		            this.buildRegisterForm();
 				}
 				);
 		}
