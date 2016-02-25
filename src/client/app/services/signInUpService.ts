@@ -5,7 +5,9 @@ import { Http, Headers, Response } from 'angular2/http';
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
-
+import 'rxjs/add/operator/delay';
+import 'rxjs/add/operator/retry';
+import 'rxjs/add/operator/timeout';
 
 @Injectable()
 export class SignInUpService {
@@ -25,10 +27,33 @@ export class SignInUpService {
 		return this.http.post('http://localhost:3000/user/login', login, {
 			headers: headers
 		})
-		.map(res => {
-			alert(res.json());	
-		});
+		.map(res => res.json())
+		.delay(3000);
+
 	}
+
+	/*login(loginCreds) {
+
+		let login = "username=" + loginCreds.username + "&password=" + loginCreds.password;
+
+		var headers = new Headers();
+		headers.append('Content-Type', 'application/x-www-form-urlencoded');
+
+		return this.http.post('http://localhost:3000/user/login', login, {
+			headers: headers,
+			timeout: 1000
+		})
+		.retry(2)
+		.timeout(1000, new Error('checking for error.'))
+		
+		.map(res => res.json())
+		.delay(2000)
+		.subscribe(
+          (data) => resolve(data.json()),
+          (err) => reject(err)
+        );;
+
+	}*/
 
 	register(regCreds) {
 
@@ -40,7 +65,8 @@ export class SignInUpService {
 		return this.http.post('http://localhost:3000/user/register', register, {
 			headers: headers
 		})
-		.map(res => res.json());
+		.map(res => res.json())
+		.delay(3000);
 
 	}
 

@@ -29,7 +29,7 @@
 				</p>
 				
 				<p class="fieldset">
-					<button class="full-width" type="submit" [class.btnLoading]="loginFormProcess" [disabled]="!loginForm.valid" (click)="submitLoginData()">Login</button>
+					<button class="full-width" type="submit" [class.btnLoading]="loginFormProcess" [disabled]="!loginForm.valid || loginFormProcess" (click)="submitLoginData()">Login</button>
 				</p>
 			</form>
 			
@@ -65,7 +65,7 @@
 				</p>
 
 				<p class="fieldset">
-					<button class="full-width has-padding" type="submit" [class.btnLoading]="loginFormProcess" [disabled]="!registerForm.valid" (click)="submitRegisterData()">Create account</button>
+					<button class="full-width has-padding" type="submit" [class.btnLoading]="registerFormProcess" [disabled]="!registerForm.valid  || registerFormProcess" (click)="submitRegisterData()">Create account</button>
 				</p>
 			</form>
 

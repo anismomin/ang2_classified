@@ -7,6 +7,7 @@ import {SignInUpService} from '../../services/SignInUpService'
 import {ControlMessages} from '../controlMessage/control-messages.component'
 import {ValidationService} from '../../services/validationService'
 
+
 @Component({
 	selector: 'signin-up',
     templateUrl: 'app/components/signin/signin.html',
@@ -31,8 +32,8 @@ export class SignInComponent {
 	registerResponse: string;
 	postResponse: string;
 
-	loginFormProcess: boolean = true;
-	registerFormProcess: boolean = true;
+	loginFormProcess: boolean = false;
+	registerFormProcess: boolean = false;
 
 
 	constructor(private _http: Http, private _loginservice: SignInUpService, private fb: FormBuilder) {
@@ -48,7 +49,8 @@ export class SignInComponent {
 			'loginUsername': ['', Validators.compose([Validators.required, ValidationService.startsWithNumber])],
 			'loginPassword': ['', Validators.compose([Validators.required, ValidationService.passwordValidator])]
 		});
-	}
+		this.registerFormProcess = false;
+	}	
 
 	submitLoginData() {
 		console.log(JSON.stringify(this.loginForm.value))
@@ -60,6 +62,8 @@ export class SignInComponent {
 			'registerEmail': ['', Validators.compose([Validators.required, ValidationService.emailValidator])],
 			'registerPassword': ['', Validators.compose([Validators.required, ValidationService.passwordValidator])],
 		});
+
+		this.registerFormProcess = false;
 	}
 
 	submitRegisterData() {
@@ -71,8 +75,8 @@ export class SignInComponent {
 		if ($event.target.classList.contains('cd-user-modal')) {
 			//this.signInUpModal = null;	
 			this.closeSignInUp.emit(value);
-      //       this.buildLoginForm();
-		    // this.buildRegisterForm();
+            this.buildLoginForm();
+		    this.buildRegisterForm();
 			return;
 		}
 	}
@@ -97,7 +101,7 @@ export class SignInComponent {
 				password: loginData.loginPassword
 			};
 
-			//this.loginFormProcess = true;
+			this.loginFormProcess = true;
 
 			this._loginservice.login(logincreds)
 				.subscribe(
@@ -107,9 +111,9 @@ export class SignInComponent {
 					this.logInStatus = true;
 					this.signInUpModal = null;
 					this.loginStatusEvent.emit(true);
-					//this.loginFormProcess = false;
-               //      this.buildLoginForm();
-		             // this.buildRegisterForm();
+					this.loginFormProcess = false;
+                    /*this.buildLoginForm();
+		            this.buildRegisterForm();*/
 					console.log(this.loginResponse);
 				}
 				);
@@ -125,7 +129,7 @@ export class SignInComponent {
 				email: registerData.registerEmail,
 				password: registerData.registerPassword
 			};
-			//this.registerFormProcess = true;
+			this.registerFormProcess = true;
 
 			this._loginservice.register(creds)
 				.subscribe(
@@ -135,9 +139,9 @@ export class SignInComponent {
 					this.logInStatus = true;
 					this.signInUpModal = null;
 					this.loginStatusEvent.emit(true);
-					//this.registerFormProcess = false;
-					 // this.buildLoginForm();
-					 // this.buildRegisterForm();
+					this.registerFormProcess = false;
+					/* this.buildLoginForm();
+					 this.buildRegisterForm();*/
 					console.log(this.registerResponse);
 				}
 				);
