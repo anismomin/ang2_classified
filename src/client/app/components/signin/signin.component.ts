@@ -1,7 +1,7 @@
 import {Component, EventEmitter} from 'angular2/core'
 import {Http, Headers, HTTP_PROVIDERS}  from 'angular2/http'
 
-import {ControlGroup, FormBuilder, Control, Validators, FORM_DIRECTIVES, AbstractControl} from 'angular2/common'
+import {ControlGroup, FormBuilder, Validators, FORM_DIRECTIVES, AbstractControl} from 'angular2/common'
 
 import {SignInUpService} from '../../services/SignInUpService'
 import {ControlMessages} from '../controlMessage/control-messages.component'
@@ -25,14 +25,14 @@ export class SignInComponent {
 
 	loginForm: ControlGroup;
 	registerForm: ControlGroup;
-	loginUsername: AbstractControl;
+	
 
 	loginResponse : string;
 	registerResponse: string;
 	postResponse: string;
 
-	loginFormProcess: boolean = false;
-	registerFormProcess: boolean = false;
+	loginFormProcess: boolean = true;
+	registerFormProcess: boolean = true;
 
 
 	constructor(private _http: Http, private _loginservice: SignInUpService, private fb: FormBuilder) {
@@ -43,9 +43,9 @@ export class SignInComponent {
 
 
 	buildLoginForm() :void {
-		this.loginUsername = new Control('', Validators.compose([Validators.required, ValidationService.startsWithNumber]));
+		
 		this.loginForm = this.fb.group({
-			'loginUsername': this.loginUsername,
+			'loginUsername': ['', Validators.compose([Validators.required, ValidationService.startsWithNumber])],
 			'loginPassword': ['', Validators.compose([Validators.required, ValidationService.passwordValidator])]
 		});
 	}
@@ -71,8 +71,8 @@ export class SignInComponent {
 		if ($event.target.classList.contains('cd-user-modal')) {
 			//this.signInUpModal = null;	
 			this.closeSignInUp.emit(value);
-            this.buildLoginForm();
-		    this.buildRegisterForm();
+      //       this.buildLoginForm();
+		    // this.buildRegisterForm();
 			return;
 		}
 	}
@@ -97,7 +97,7 @@ export class SignInComponent {
 				password: loginData.loginPassword
 			};
 
-			this.loginFormProcess = true;
+			//this.loginFormProcess = true;
 
 			this._loginservice.login(logincreds)
 				.subscribe(
@@ -107,15 +107,10 @@ export class SignInComponent {
 					this.logInStatus = true;
 					this.signInUpModal = null;
 					this.loginStatusEvent.emit(true);
-					this.loginFormProcess = false;
-
-					/*this.loginUsername = this.loginForm.controls['loginUsername'];
-					this.loginUsername.updateValueAndValidity("");*/
-
+					//this.loginFormProcess = false;
+               //      this.buildLoginForm();
+		             // this.buildRegisterForm();
 					console.log(this.loginResponse);
-                    
-                    this.buildLoginForm();
-		            this.buildRegisterForm();
 				}
 				);
 		}
@@ -123,15 +118,14 @@ export class SignInComponent {
 
 	// Make Register Http Request
 	register(registerData) {
-
+		
 		if (this.registerForm.dirty && this.registerForm.valid) {
 			let creds = {
 				username: registerData.registerUsername,
 				email: registerData.registerEmail,
 				password: registerData.registerPassword
 			};
-
-			this.registerFormProcess = true;
+			//this.registerFormProcess = true;
 
 			this._loginservice.register(creds)
 				.subscribe(
@@ -141,12 +135,10 @@ export class SignInComponent {
 					this.logInStatus = true;
 					this.signInUpModal = null;
 					this.loginStatusEvent.emit(true);
-					this.registerFormProcess = false;
-
+					//this.registerFormProcess = false;
+					 // this.buildLoginForm();
+					 // this.buildRegisterForm();
 					console.log(this.registerResponse);
-                    
-                    this.buildLoginForm();
-		            this.buildRegisterForm();
 				}
 				);
 		}
