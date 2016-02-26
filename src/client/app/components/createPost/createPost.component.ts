@@ -20,14 +20,14 @@ export class CreatePostComponent {
 	constructor(private fb: FormBuilder, private _http: Http, private _postService: PostService) {
 
 		this.postingForm = this.fb.group({
-			'title': ['', Validators.compose([Validators.required])],
-			'category': ['', Validators.compose([Validators.required])],
-			'description': ['', Validators.compose([Validators.required])],
-			'name': ['', Validators.compose([Validators.required])],
-			'phone': ['', Validators.compose([Validators.required])],
+			'title': ['dumytitile', Validators.compose([Validators.required])],
+			'category': ['mobile', Validators.compose([Validators.required])],
+			'description': ['Checkout this description', Validators.compose([Validators.required])],
+			'name': ['mynmae', Validators.compose([Validators.required])],
+			'phone': ['03343853136', Validators.compose([Validators.required])],
 			'images': ['', Validators.compose([Validators.required])],
-			'state': ['', Validators.compose([Validators.required])],
-			'city': ['', Validators.compose([Validators.required])]
+			'state': ['sindh', Validators.compose([Validators.required])],
+			'city': ['karachi', Validators.compose([Validators.required])]
 		});
 	}
 

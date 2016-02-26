@@ -20,7 +20,7 @@ var express = require('express'),
     passport = require('passport'),
     localStrategy = require('passport-local').Strategy,
     debug = require('debug')('passport-mongo');
-
+    
     import passportConf from './auth/authConfig';
     import restrict from './auth/restrict';
 // =======================
@@ -37,6 +37,8 @@ var post = require('./routes/posting.js');
 // define middleware
 app.use(express.static(path.join(__dirname, '/../client')));
 app.use(express.static(path.join(__dirname, '/../uploads')));
+app.use('/favicon.ico', express.static(path.join(__dirname, '/../client/assets/images/favicon.ico')))
+
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -66,7 +68,7 @@ app.use(function(req, res, next) {
 // Routes ============
 // =======================
 app.use('/', account);
-app.use('/post/', post);
+app.use('/post', post);
 
 
 // error hndlers

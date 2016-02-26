@@ -112,8 +112,8 @@ export class SignInComponent {
 					this.signInUpModal = null;
 					this.loginStatusEvent.emit(true);
 					this.loginFormProcess = false;
-                    /*this.buildLoginForm();
-		            this.buildRegisterForm();*/
+              //       this.buildLoginForm();
+		            // this.buildRegisterForm();
 					console.log(this.loginResponse);
 				}
 				);
@@ -140,8 +140,8 @@ export class SignInComponent {
 					this.signInUpModal = null;
 					this.loginStatusEvent.emit(true);
 					this.registerFormProcess = false;
-					/* this.buildLoginForm();
-					 this.buildRegisterForm();*/
+					 // this.buildLoginForm();
+					 // this.buildRegisterForm();
 					console.log(this.registerResponse);
 				}
 				);

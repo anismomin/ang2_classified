@@ -7,14 +7,16 @@ export class PostService {
 
 	public postResponse;
 
-	constructor(public http: Http) { }
+	constructor(private http: Http) { }
 
 	createPost(postData) {
-			
+	
+		let Creds = JSON.stringify(postData);
+		
 		var headers = new Headers();
 		headers.append('Content-Type', 'application/json');
 
-		return this.http.post('http://localhost:3000/post/create', postData, {
+		return this.http.post('http://localhost:3000/post/create', Creds, {
 			headers: headers
 		})
 		.map(res => res.json());

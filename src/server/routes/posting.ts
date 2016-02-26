@@ -58,7 +58,7 @@ router.get('/', (req: express.Request, res: express.Response) => {
 	let b = req.body;
 	//var images = req.files;
 	var imgArray = [];
-	
+	console.log(b);
 	// var images = [{
 	// 	path: './images/image.jpg',
 	// 	filename: 'banana'
