@@ -33,13 +33,10 @@ router.use(methodOverride(function(req, res) {
 
 router.get('/', (req: express.Request, res: express.Response) => {
 
-	Posting.find({ status: true }, (err, docs) => {
-		
+	//Posting.find({ status: true }, (err, docs) => {
+	Posting.find({}, (err, docs) => {
 		res.json({ success: true, data: docs });					
-	
 	});
-
-
 })
 // router.get('/create', (req: express.Request, res: express.Response) => {
 	

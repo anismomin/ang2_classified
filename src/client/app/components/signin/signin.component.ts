@@ -72,7 +72,7 @@ export class SignInComponent {
 
 	//Close Sign in Tab
 	closeSignInUpModal($event, value) {
-		if ($event.target.classList.contains('cd-user-modal')) {
+		if ($event.target.classList.contains('cd-user-modal') || $event.target.classList.contains('cd-close-modal')) {
 			//this.signInUpModal = null;	
 			this.closeSignInUp.emit(value);
             this.buildLoginForm();

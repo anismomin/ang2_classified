@@ -13,42 +13,46 @@ import {PostService} from '../../services/postService'
 })
 export class CreatePostComponent {
 	
-	postingForm: ControlGroup;
+	postForm: ControlGroup;
 	postingResponse: string;
-
+	postFormProcess = false;
 
 	constructor(private fb: FormBuilder, private _http: Http, private _postService: PostService) {
 
-		this.postingForm = this.fb.group({
+		this.postForm = this.fb.group({
 			'title': ['dumytitile', Validators.compose([Validators.required])],
 			'category': ['mobile', Validators.compose([Validators.required])],
 			'description': ['Checkout this description', Validators.compose([Validators.required])],
 			'name': ['mynmae', Validators.compose([Validators.required])],
 			'phone': ['03343853136', Validators.compose([Validators.required])],
-			'images': ['', Validators.compose([Validators.required])],
+			'images': [''],
 			'state': ['sindh', Validators.compose([Validators.required])],
 			'city': ['karachi', Validators.compose([Validators.required])]
 		});
 	}
 
-	createPost(postingForm) {
+	createPost(postForm) {
 		
-		let PostData = {
-			title: postingForm.title,
-			category: postingForm.category,
-			description: postingForm.description,
-			name: postingForm.name,
-			phone: postingForm.phone,
-			images: postingForm.images,
-			state: postingForm.state,
-			city: postingForm.city
-		};
+		// let PostData = {
+		// 	title: postForm.title,
+		// 	category: postForm.category,
+		// 	description: postForm.description,
+		// 	name: postForm.name,
+		// 	phone: postForm.phone,
+		// 	images: postForm.images,
+		// 	state: postForm.state,
+		// 	city: postForm.city
+		// };
+		
+		let postData = JSON.stringify(postForm);
+		this.postFormProcess = true;
 
-		this._postService.createPost(postingForm)
+		this._postService.createPost(postForm)
 			.subscribe(
 				data => this.postingResponse = JSON.stringify(data),
 				error => this.logError(error),
 				() => {
+					this.postFormProcess = false;
 					console.log(this.postingResponse);
 				}
 			);

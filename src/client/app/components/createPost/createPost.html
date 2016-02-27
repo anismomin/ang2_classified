@@ -1,4 +1,4 @@
-<form class="cd-form-post floating-labels" [ngFormModel]="postingForm" (ngSubmit)="createPost(postingForm.value)">
+<form class="cd-form cd-form-post" [ngFormModel]="postForm" (ngSubmit)="createPost(postForm.value)">
 		<fieldset>
 			<legend>Create a Post</legend>
 
@@ -6,16 +6,16 @@
 				<p>Please enter a valid Phone Number</p>
 			</div>
 
-			<div class="icon">
-				<label class="cd-label" for="cd-title">Title</label>
-				<input class="user" type="text" name="cd-title" id="cd-title"  ngControl="title">
+			<div class="fieldset">
+				<label for="title">Title</label>
+				<input class="user" type="text" name="title" id="title"  ngControl="title" required>
 				<control-messages control="title"></control-messages>
-		    </div> 
-
-		    <div>
-				<h4>Category</h4>
-				<p class="cd-select icon">
-					<select class="budget" ngControl="category">
+			</div>
+		
+		    <div class="fieldset">
+				<label for="category">Category</label>
+				<p class="cd-select">
+					<select class="category" ngControl="category">
 						<option value="0">Select Category</option>
 						<option  value="mobile">Mobile</option>
 						<option  value="vehicles">Vehicles</option>
@@ -26,38 +26,34 @@
 				<control-messages control="category"></control-messages>
 			</div> 
 
-		    
-		</fieldset>
-
-		<fieldset>
 			<legend>Item Info</legend>
-			<div class="icon">
-				<label class="cd-label" for="cd-textarea">Item description</label>
-      			<textarea class="message" name="cd-textarea" id="cd-textarea" ngControl="description"></textarea>
+			<div class="fieldset">
+				<label for="description">Item description</label>
+      			<textarea name="description" id="description" ngControl="description"></textarea>
       			<control-messages control="description"></control-messages>
 			</div>
 
-			<div class="icon">
-				<label class="cd-label" for="cd-images">Add Images</label>
-				<input class="user" type="file" name="cd-images" id="cd-images" ngControl="images">
+			<div class="fieldset">
+				<label class="images" for="cd-images">Add Images</label>
+				<input type="file" name="images" ngControl="images">
 				<control-messages control="images"></control-messages>
 		    </div> 
 
-			<div class="icon">
-				<label class="cd-label" for="cd-name">Name</label>
-				<input class="user" type="text" name="cd-name" id="cd-name" ngControl="name">
+			<div class="fieldset">
+				<label for="name">Name</label>
+				<input type="text" name="name" ngControl="name">
 				<control-messages control="name"></control-messages>
 		    </div> 
 
-		    <div class="icon">
-				<label class="cd-label" for="cd-phone">Phone</label>
-				<input class="user" type="text" name="cd-phone" id="cd-phone" ngControl="phone">
+		    <div class="fieldset">
+				<label for="phone">Phone</label>
+				<input type="text" name="phone" ngControl="phone">
 				<control-messages control="phone"></control-messages>
 		    </div> 
 
-		 	<div>
-				<h4>State</h4>
-				<p class="cd-select icon">
+		 	<div class="fieldset">
+				<label for="state">State</label>
+				<p class="cd-select">
 					<select class="budget" ngControl="state">
 						<option value="0">Select State</option>
 						<option value="sindh">Sindh</option>
@@ -69,9 +65,9 @@
 				<control-messages control="state"></control-messages>
 			</div>
 
-			<div>
-				<h4>City</h4>
-				<p class="cd-select icon">
+			<div class="fieldset">
+				<label for="city">City</label>
+				<p class="cd-select">
 					<select class="budget" ngControl="city">
 						<option value="0">Select City</option>
 						<option value="karachi">karachi</option>
@@ -83,37 +79,36 @@
 				<control-messages control="city"></control-messages>
 			</div>
 
-			<div>
-		      	<button type="submit">Create Post</button>
+			
+			<div  class="fieldset">
+		      	<button type="submit" class="full-width" [class.btnLoading]="postFormProcess" [disabled]="!postForm.valid  || postFormProcess">Create Post</button>
 		    </div>
+
 		</fieldset>
 
 		<!-- 
-		    <div class="icon">
-		    	<label class="cd-label" for="cd-company">Company</label>
-				<input class="company" type="text" name="cd-company" id="cd-company">
-		    </div> 
+		    
+<div class="fieldset">
+				<label for="city">Features</label>
+				<ul class="cd-form-list">
+					<li>
+						<input type="checkbox" id="cd-checkbox-1">
+						<label for="cd-checkbox-1">Option 1</label>
+					</li>
 
-		    <div class="icon">
-		    	<label class="cd-label" for="cd-email">Email</label>
-				<input class="email error" type="email" name="cd-email" id="cd-email" >
-		    </div> 
+					<li>
+						<input type="checkbox" id="cd-checkbox-2">
+						<label for="cd-checkbox-2">Option 2</label>
+					</li>
 
-			<div>
-				<h4>Budget</h4>
-				<p class="cd-select icon">
-					<select class="budget">
-						<option value="0">Select Budget</option>
-						<option value="1">&lt; $5000</option>
-						<option value="2">$5000 - $10000</option>
-						<option value="3">&gt; $10000</option>
-					</select>
-				</p>
-			</div> 
-
-			<div>
-				<h4>Project type</h4>
-
+					<li>
+						<input type="checkbox" id="cd-checkbox-3">
+						<label for="cd-checkbox-3">Option 3</label>
+					</li>
+				</ul>
+			</div>
+			<div class="fieldset">
+				<label for="city">Project type</label>
 				<ul class="cd-form-list">
 					<li>
 						<input type="radio" name="radio-button" id="cd-radio-1" checked>
@@ -132,25 +127,5 @@
 				</ul>
 			</div>
 
-			<div>
-				<h4>Features</h4>
-
-				<ul class="cd-form-list">
-					<li>
-						<input type="checkbox" id="cd-checkbox-1">
-						<label for="cd-checkbox-1">Option 1</label>
-					</li>
-
-					<li>
-						<input type="checkbox" id="cd-checkbox-2">
-						<label for="cd-checkbox-2">Option 2</label>
-					</li>
-
-					<li>
-						<input type="checkbox" id="cd-checkbox-3">
-						<label for="cd-checkbox-3">Option 3</label>
-					</li>
-				</ul>
-			</div>
 		    -->
 	</form>

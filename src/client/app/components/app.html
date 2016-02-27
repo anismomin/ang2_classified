@@ -1,5 +1,5 @@
 <header class="cd-main-header">
-    <a href="#0" class="cd-logo"><img src="assets/images/cd-logo.svg" alt="Logo"></a>
+    <a href="#0" class="cd-logo"><img src="assets/images/ngClassifiedLogo.png" alt="Logo"></a>
     
     <div class="cd-search is-hidden">
         <form action="#0">
@@ -11,8 +11,8 @@
 
     <nav class="cd-nav">
         <ul class="cd-top-nav">
-            <li><a href="#0">Tour</a></li>
-            <li><a href="#0">Support</a></li>
+            <!--li><a href="#0">Tour</a></li>
+            <li><a href="#0">Support</a></li-->
             <li *ngIf="!logInStatus"><a (click)="signInModal()">Sign in</a></li>
             <li *ngIf="!logInStatus" ><a (click)="signUpModal()" >Sign up</a></li>
             <li *ngIf="logInStatus" class="has-children account" [class.selected]="accountDropDownActive" (click)="openAcountDropDown($event)">

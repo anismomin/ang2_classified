@@ -26,13 +26,14 @@ Header
 	float: left;
 	display: block;
 	margin: 11px 0 0 5%;
-
+	max-width:167px;
+	
 	img {
 		display: block;
 	}
 
 	@include MQ(M) {
-		margin: 16px 0 0 36px;
+		margin: 12px 0 0 12px;
 	}
 }
 
@@ -152,7 +153,7 @@ Header
 		width: 250px;
 		height: 100%;
 		// padding: 12px 0;
-		margin: 0 0 0 2.5em;
+		margin: 0 0 0 1.3em;
 
 		&.is-hidden {
 			/* reset style */
@@ -241,7 +242,6 @@ Top Navigation
 
 		> li {
 			display: inline-block;
-			margin-right: 1em;
 			height: 100%;
 
 			&:last-of-type {

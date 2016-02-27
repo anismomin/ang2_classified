@@ -1,6 +1,13 @@
 import {Injectable} from 'angular2/core'
 import { Http, Headers, Response } from 'angular2/http';
-import 'rxjs/add/operator/map'
+
+//Grab everything with import 'rxjs/Rx';
+import {Observable} from 'rxjs/Observable';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/catch';
+import 'rxjs/add/operator/delay';
+import 'rxjs/add/operator/retry';
+import 'rxjs/add/operator/timeout';
 
 @Injectable()
 export class PostService {
@@ -10,25 +17,20 @@ export class PostService {
 	constructor(private http: Http) { }
 
 	createPost(postData) {
-	
+
 		let Creds = JSON.stringify(postData);
-		
 		var headers = new Headers();
 		headers.append('Content-Type', 'application/json');
 
 		return this.http.post('http://localhost:3000/post/create', Creds, {
 			headers: headers
 		})
-		.map(res => res.json());
+		.map(res => res.json())
+		.delay(3000);
 	}
 
-
-
-	getpost() {
-		return this.http.get('http://jsonplaceholder.typicode.com/posts/1')
+	getposts() {
+		return this.http.get('http://localhost:3000/post')
 			.map(res => res.json());
 	}
-
-
-
 }
