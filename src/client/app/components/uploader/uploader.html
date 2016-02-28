@@ -1,0 +1,22 @@
+<div>
+  <label for="files-pb" class="ui small black button right icon upload-button">
+      <i class="ion-document-text icon"></i>
+      Choose files
+  </label>
+  <input type="file" 
+         id="files-pb"
+         style="display:none;"
+         [ng-file-select]="options"
+         (onUpload)="handleUpload($event)"
+         ngControl="images" 
+         multiple>
+</div>
+<control-messages control="images"></control-messages>
+<div class="ui divider"></div>
+
+<div *ngFor="#progressObj of uploadProgresses">
+  <div class="ui indicating olive progress">
+    <div class="bar" [style.width]="progressObj.percent + '%'"></div>
+    <div class="label">Uploading file ({{ progressObj.percent }}%)</div>
+  </div>
+</div>

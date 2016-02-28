@@ -23,6 +23,7 @@
     <script src="/assets/libs/angular2/bundles/angular2.dev.js"></script>   
     <script src="/assets/libs/angular2/bundles/router.dev.js"></script>
     <script src="/assets/libs/angular2/bundles/http.dev.js"></script>
+    <script src="/assets/libs/ng2-uploader/bundles/ng2-uploader.js"></script>
 
     <script src="./assets/js/jquery-2.1.4.js"></script>
     <script src="./assets/js/jquery.menu-aim.js"></script>
@@ -38,6 +39,9 @@
                     defaultExtension: 'js'
                 },
             },
+            map: {
+              'ng2-uploader': '/assets/libs/ng2-uploader/ng2-uploader.js'
+            }
         });
         System.import('app/boot')
                 .then(null, console.error.bind(console));
