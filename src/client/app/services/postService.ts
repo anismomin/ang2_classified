@@ -14,7 +14,7 @@ export class PostService {
 
 	public postResponse;
 
-	constructor(private http: Http) { }
+	constructor(public http: Http) { }
 
 	createPost(postData) {
 

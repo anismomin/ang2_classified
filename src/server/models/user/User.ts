@@ -4,16 +4,16 @@ import IUser from './IUser'
 import userService = require('../../services/userService');
 export interface IUserModel extends IUser, mongoose.Document { }
 
-
 // user model
 var Schema = mongoose.Schema,
     passportLocalMongoose = require('passport-local-mongoose');
 
-
 var userSchema = new Schema({
-  username: String,
-  email: String,
-  password: String
+  	username: String,
+  	email: String,
+  	password: String,
+	status: { type: Boolean, default: true },
+	created_at: { type: Date, default: Date.now() }
 });
 
 //calling path method of user schema

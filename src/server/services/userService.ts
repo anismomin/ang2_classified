@@ -5,6 +5,7 @@ export let addUser = function(user, next) {
 		username: user.username,
 		email: user.email.toLowerCase(),
 		password: user.password,
+		status: true
 	});
 
 	newUser.save(function(err) {

@@ -31,7 +31,6 @@ export class SignInUpService {
 		.delay(3000);
 
 	}
-
 	/*login(loginCreds) {
 
 		let login = "username=" + loginCreds.username + "&password=" + loginCreds.password;
@@ -74,17 +73,5 @@ export class SignInUpService {
 		return this.http.get('http://localhost:3000/user/logout')
 			.map(res => res.json());
 	}
-
-
-	getpost() {
-		return this.http.get('http://jsonplaceholder.typicode.com/posts/1')
-			.map(res => res.json());
-	}
-
-	// handleError(error: any) {
- //        console.error(error);
- //        return Observable.throw(error.json().error || 'Server error');
- //    }
-
 
 }

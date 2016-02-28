@@ -1,17 +1,19 @@
 <form class="cd-form cd-form-post" [ngFormModel]="postForm" (ngSubmit)="createPost(postForm.value)">
 		<fieldset>
 			<legend>Create a Post</legend>
-
-			<div class="error-message">
+			<div class="error-message" [hidden]="postForm.valid">
 				<p>Please enter a valid Phone Number</p>
 			</div>
-
 			<div class="fieldset">
 				<label for="title">Title</label>
-				<input class="user" type="text" name="title" id="title"  ngControl="title" required>
+				<input type="text" name="title" id="title"  ngControl="title" required>
 				<control-messages control="title"></control-messages>
 			</div>
-		
+			<div class="fieldset">
+				<label for="price">Price</label>
+				<input type="text" name="price" id="price"  ngControl="price" required>
+				<control-messages control="price"></control-messages>
+			</div>
 		    <div class="fieldset">
 				<label for="category">Category</label>
 				<p class="cd-select">
@@ -25,32 +27,26 @@
 				</p>
 				<control-messages control="category"></control-messages>
 			</div> 
-
-			<legend>Item Info</legend>
 			<div class="fieldset">
 				<label for="description">Item description</label>
       			<textarea name="description" id="description" ngControl="description"></textarea>
       			<control-messages control="description"></control-messages>
 			</div>
-
 			<div class="fieldset">
 				<label class="images" for="cd-images">Add Images</label>
 				<input type="file" name="images" ngControl="images">
 				<control-messages control="images"></control-messages>
 		    </div> 
-
 			<div class="fieldset">
 				<label for="name">Name</label>
 				<input type="text" name="name" ngControl="name">
 				<control-messages control="name"></control-messages>
 		    </div> 
-
 		    <div class="fieldset">
 				<label for="phone">Phone</label>
 				<input type="text" name="phone" ngControl="phone">
 				<control-messages control="phone"></control-messages>
 		    </div> 
-
 		 	<div class="fieldset">
 				<label for="state">State</label>
 				<p class="cd-select">
@@ -64,7 +60,6 @@
 				</p>
 				<control-messages control="state"></control-messages>
 			</div>
-
 			<div class="fieldset">
 				<label for="city">City</label>
 				<p class="cd-select">
@@ -78,12 +73,9 @@
 				</p>
 				<control-messages control="city"></control-messages>
 			</div>
-
-			
 			<div  class="fieldset">
 		      	<button type="submit" class="full-width" [class.btnLoading]="postFormProcess" [disabled]="!postForm.valid  || postFormProcess">Create Post</button>
 		    </div>
-
 		</fieldset>
 
 		<!-- 

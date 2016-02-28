@@ -18,9 +18,9 @@ export class CreatePostComponent {
 	postFormProcess = false;
 
 	constructor(private fb: FormBuilder, private _http: Http, private _postService: PostService) {
-
 		this.postForm = this.fb.group({
 			'title': ['dumytitile', Validators.compose([Validators.required])],
+			'price': ['20', Validators.compose([Validators.required])],
 			'category': ['mobile', Validators.compose([Validators.required])],
 			'description': ['Checkout this description', Validators.compose([Validators.required])],
 			'name': ['mynmae', Validators.compose([Validators.required])],
@@ -32,7 +32,6 @@ export class CreatePostComponent {
 	}
 
 	createPost(postForm) {
-		
 		// let PostData = {
 		// 	title: postForm.title,
 		// 	category: postForm.category,
@@ -43,23 +42,17 @@ export class CreatePostComponent {
 		// 	state: postForm.state,
 		// 	city: postForm.city
 		// };
-		
 		let postData = JSON.stringify(postForm);
 		this.postFormProcess = true;
 
 		this._postService.createPost(postForm)
 			.subscribe(
 				data => this.postingResponse = JSON.stringify(data),
-				error => this.logError(error),
+				error => console.log(error),
 				() => {
 					this.postFormProcess = false;
 					console.log(this.postingResponse);
 				}
 			);
-	}
-
-	logError(error) {
-		console.log(error);
-	}
-	
+	}	
 }

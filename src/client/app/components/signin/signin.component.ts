@@ -1,12 +1,10 @@
 import {Component, EventEmitter} from 'angular2/core'
 import {Http, Headers, HTTP_PROVIDERS}  from 'angular2/http'
-
-import {ControlGroup, FormBuilder, Validators, FORM_DIRECTIVES, AbstractControl} from 'angular2/common'
+import {ControlGroup, FormBuilder, Validators, FORM_DIRECTIVES} from 'angular2/common'
 
 import {SignInUpService} from '../../services/SignInUpService'
 import {ControlMessages} from '../controlMessage/control-messages.component'
 import {ValidationService} from '../../services/validationService'
-
 
 @Component({
 	selector: 'signin-up',
@@ -23,11 +21,9 @@ export class SignInComponent {
 	loginStatusEvent: EventEmitter<any>  = new EventEmitter();
 	
 	logInStatus : boolean = false;
-
 	loginForm: ControlGroup;
 	registerForm: ControlGroup;
 	
-
 	loginResponse : string;
 	registerResponse: string;
 	postResponse: string;
@@ -35,13 +31,11 @@ export class SignInComponent {
 	loginFormProcess: boolean = false;
 	registerFormProcess: boolean = false;
 
-
 	constructor(private _http: Http, private _loginservice: SignInUpService, private fb: FormBuilder) {
 		this.fb = fb;
 		this.buildLoginForm();
 		this.buildRegisterForm();	
 	}
-
 
 	buildLoginForm() :void {
 		
@@ -148,15 +142,6 @@ export class SignInComponent {
 		}
 	}
 
-	getpost() {
-		this._loginservice.getpost()
-			.subscribe(
-			data => this.postResponse = JSON.stringify(data),
-			error => this.logError(error),
-			() => console.log('FINISH')
-			);
-	}
-	
 	logError(error) {
 		console.log(error);
 	}

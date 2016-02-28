@@ -1,19 +1,20 @@
-interface IPostingImages {
+interface IPostImages {
 	path: string;
 }
 
-interface IPosting {
-	user_id: string,
+interface IPost {
+	user_id: string;
 	title: string;
 	price: number;
 	category: string;
 	description: string;
-	images: IPostingImages[];
+	images: IPostImages[];
 	name: string;
 	phone: number;
 	state: string;
 	city: string;
 	status: boolean;
+	cerate_at: Date;
 }
 
-export default IPosting;
+export default IPost;

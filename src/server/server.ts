@@ -32,7 +32,7 @@ var app = express();
 
 // require routes
 var account = require('./routes/account.js');
-var post = require('./routes/posting.js');
+var post = require('./routes/post.js');
 
 // define middleware
 app.use(express.static(path.join(__dirname, '/../client')));
@@ -50,12 +50,6 @@ app.use(require('express-session')({
 }));
 app.use(passport.initialize());
 app.use(passport.session());
-
-// configure passport
-// passport.use(new localStrategy(User.authenticate()));
-// passport.serializeUser(User.serializeUser());
-// passport.deserializeUser(User.deserializeUser());
-
 passportConf();
 
 app.use(function(req, res, next) {
@@ -69,7 +63,6 @@ app.use(function(req, res, next) {
 // =======================
 app.use('/', account);
 app.use('/post', post);
-
 
 // error hndlers
 /*interface Error {

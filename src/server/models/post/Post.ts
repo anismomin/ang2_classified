@@ -1,15 +1,13 @@
-//import mongoose = require('mongoose');
-
 import mongoose from '../../db'
-import IPosting from './IPosting';
+import IPost from './IPost';
 
 // set type of User Id to ObjectId // but what if want to fill with blank
 var Schema = mongoose.Schema;
-    //ObjectId = Schema.ObjectId;
+//ObjectId = Schema.ObjectId;
 
-export interface IPostingModel extends IPosting, mongoose.Document{};
+export interface IPostModel extends IPost, mongoose.Document { };
 
-var PostingSchema = new mongoose.Schema({
+var PostSchema = new mongoose.Schema({
 	user_id: String,
 	title: String,
 	price: Number,
@@ -24,4 +22,4 @@ var PostingSchema = new mongoose.Schema({
 	created_at: { type: Date, default: Date.now() }
 });
 
-export let Posting = mongoose.model<IPostingModel>('Posting', PostingSchema);
+export let Post = mongoose.model<IPostModel>('Post', PostSchema);

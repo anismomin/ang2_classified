@@ -19,7 +19,7 @@ module.exports = function() {
 
 		built : './built/',
 		builtClient: './built/client/',
-		builtLibs: './built/client/libs/',
+		builtLibs: './built/client/assets/libs/',
 		builtApp: './built/client/app/',
 		images: './built/client/assets/images/',
 		scss: './built/client/assets/css/',

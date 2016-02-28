@@ -3,14 +3,12 @@
 import express = require('express');
 import path = require('path');
 var methodOverride = require('method-override');
-var multer = require('multer');
-var crypto = require('crypto');
+// var multer = require('multer');
+// var crypto = require('crypto');
 var router = express.Router();
 
-
 import {IUserModel, User} from '../models/user/User';
-import {IPostingModel, Posting} from '../models/post/Posting';
-
+import {IPostModel, Post} from '../models/post/Post';
 
 // var storage = multer.diskStorage({
 // 	destination: '../../../uploads/',
@@ -21,7 +19,6 @@ import {IPostingModel, Posting} from '../models/post/Posting';
 // 		})
 // 	}
 // });
-
 router.use(methodOverride(function(req, res) {
 	if (req.body && typeof req.body === 'object' && '_method' in req.body) {
 		// look in urlencoded POST bodies and delete it
@@ -30,32 +27,19 @@ router.use(methodOverride(function(req, res) {
 		return method
 	}
 }))
-
-router.get('/', (req: express.Request, res: express.Response) => {
-
-	//Posting.find({ status: true }, (err, docs) => {
-	Posting.find({}, (err, docs) => {
-		res.json({ success: true, data: docs });					
+.get('/', (req: express.Request, res: express.Response) => {
+	//Post.find({ status: true }, (err, docs) => {
+	Post.find({}, (err, docs) => {
+		res.status(200).json(docs);					
 	});
 })
-// router.get('/create', (req: express.Request, res: express.Response) => {
-	
-// 	let vm = {
-// 		title: 'Ad Posting'
-// 	};
-	
-// 	res.render('postings/create', vm);
-
-// })
-//.post('/create', upload.array('images', 12), (req: express.Request, res: express.Response, next) => {
-	
+//.post('/create', upload.array('images', 12), (req: express.Request, res: express.Response, next) => {	
 .post('/create',  (req: express.Request, res: express.Response, next) => {
-	
 
 	let b = req.body;
 	//var images = req.files;
 	var imgArray = [];
-	console.log(b);
+
 	// var images = [{
 	// 	path: './images/image.jpg',
 	// 	filename: 'banana'
@@ -65,22 +49,18 @@ router.get('/', (req: express.Request, res: express.Response) => {
 	// 	filename: 'banana2'
 	// }];
 
-
 	// images.forEach(function(file) {
 	// 	imgArray.push({
 	// 		path: file.path,
 	// 		filename: file.filename
 	// 	});
 	// });
+	var userId = '56ce79ee63b678a005c44b5c';
 
-
-	var userId = '';
-
-	if (req.session["isLogin"] ) {
-		userId = req.session["user"]._id.toString();	
-	} 
-
-	let posting: IPostingModel = new Posting({
+	// if (req.session["isLogin"] ) {
+	// 	userId = req.session["user"]._id.toString();	
+	// } 
+	let post: IPostModel = new Post({
 		user_id: userId,
 		title: b.title,
 		category: b.category,
@@ -90,33 +70,20 @@ router.get('/', (req: express.Request, res: express.Response) => {
 		name: b.name,
 		phone: b.phone,
 		state: b.state,
-		city: b.city,
-		created_at: Date.now()
+		city: b.city
 	});
-	//console.log(posting);
-
-	posting.save(function(err) {
-		
+	post.save(function(err) {
 		if (err) {			
-			var vm = {
-				title: 'Create Posting',
-				input: req.body,
-				error: err
-			};
-			//res.render('postings/my', vm);
-
 			res.json({ success: false, error: err });
 			return;	
 		}
-
 		res.json({ success: true, message: 'Successfully Post an Advertsment.' });
-		//res.redirect('/posting/my');
 	});
 
+})
+.get('/my', (req: express.Request, res: express.Response) => {
 
-}).get('/my', (req: express.Request, res: express.Response) => {
-
-	Posting.find({}, (err, docs) => {
+	Post.find({}, (err, docs) => {
 
 		var posts = [];
 			
@@ -129,51 +96,43 @@ router.get('/', (req: express.Request, res: express.Response) => {
 				}
 			}
 		} else {
-
 			for (var i = 0; i < docs.length; i++) {
 				if (docs[i].status == true) {
 					posts.push(docs[i]);
 				}
 			}
-
 		}
 		
 		res.json({ success: true, data: posts });
 	});
 
-}).get('/:id' , (req: express.Request, res: express.Response) => {
+})
+.get('/:id' , (req: express.Request, res: express.Response) => {
 
-	Posting.findOne({ _id: req.params.id }, (err, docs) => {
-
-		// let vm = {
-		// 	title: req.params.title,
-		// 	posting: docs
-		// };
-
-		// res.render('postings/show', vm);
+	Post.findOne({ _id: req.params.id }, (err, docs) => {
 
 		res.json({ success: true, data: docs });
 
 	});
 
-}).get('/:post_id/edit', (req: express.Request, res: express.Response) => {
+})
+.get('/:post_id/edit', (req: express.Request, res: express.Response) => {
 
-	Posting.findOne({ _id: req.params.post_id }, (err, docs) => {
+	Post.findOne({ _id: req.params.post_id }, (err, docs) => {
 
 		if(err) {
-			res.json({ success: true, error: err });	
+			res.json({ success: false, error: err });	
 			return;		
 		}
-		
-
 		res.json({ success: true, data: docs });
 	});
 
-}).put('/:post_id', (req, res) => {
+})
+.put('/:post_id', (req, res) => {
 
 	var b = req.body;
 
-	Posting.update(
+	Post.update(
 	{
 		_id: req.params.post_id
 	},
@@ -197,25 +156,24 @@ router.get('/', (req: express.Request, res: express.Response) => {
 .delete('/:post_id', (req, res) => {
 
 	var b = req.body;
-	Posting.update(
-		{
-			_id: req.params.post_id
-		},
-		{
-			title: b.title,
-			category: b.category,
-			price: b.price,
-			description: b.description,
-			name: b.name,
-			phone: b.phone,
-			state: b.state,
-			city: b.city,
-		},
-		(err, post) => {
-			res.json({ success: true, message: 'Successfully Deleted the Post.'});
-		});
+	Post.update(
+	{
+		_id: req.params.post_id
+	},
+	{
+		title: b.title,
+		category: b.category,
+		price: b.price,
+		description: b.description,
+		name: b.name,
+		phone: b.phone,
+		state: b.state,
+		city: b.city,
+	},
+	(err, post) => {
+		res.json({ success: true, message: 'Successfully Deleted the Post.'});
+	});
 
 });
-
 
 export  = router;
