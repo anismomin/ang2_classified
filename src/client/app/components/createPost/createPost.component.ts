@@ -5,10 +5,11 @@ import {ControlGroup, FormBuilder, Validators, FORM_DIRECTIVES} from 'angular2/c
 import {ControlMessages} from '../controlMessage/control-messages.component'
 import {ValidationService} from '../../services/validationService'
 import {PostService} from '../../services/postService'
+import {Uploader} from '../upload/upload.component'
 
 @Component({
     templateUrl: 'app/components/createPost/createPost.html',
-    directives: [FORM_DIRECTIVES, ControlMessages],
+    directives: [FORM_DIRECTIVES, ControlMessages, Uploader],
     providers: [PostService, ValidationService]
 })
 export class CreatePostComponent {
