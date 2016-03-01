@@ -14,7 +14,6 @@
 
 //     static fromJSON(json: any) {
 //         if (json) {
-            
 //             var title: string = json.title || null;
 //             var price: number = json.price || null,
 //             var category: string = json.category || null;

@@ -29,8 +29,15 @@ export class PostService {
 		.delay(3000);
 	}
 
-	getposts() {
+	getPosts() {
 		return this.http.get('http://localhost:3000/post')
-			.map(res => res.json());
+			.map(res => res.json())
+			.delay(1500);
+	}
+
+	getpostById(id) {
+		return this.http.get('http://localhost:3000/post/:id')
+			.map(res => res.json())
+			.delay(1500);
 	}
 }

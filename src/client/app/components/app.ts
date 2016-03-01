@@ -14,9 +14,11 @@ import {SignInUpService} from '../services/SignInUpService'
     providers: [SignInUpService]
 })
 @RouteConfig([
+	/*{ path: '/', name: 'root', redirectTo: ['CreatePost']},*/
 	{ path: '/home', name: 'Home', component: HomeComponent},
 	{ path: '/posts', name: 'Posts', component: PostsComponent},
-	{ path: '/', name: 'CreatePost', component: CreatePostComponent, useAsDefault: true },	
+	{ path: '/posts/:id', name: 'Post', component: PostsComponent },
+	{ path: '/posts/create', name: 'CreatePost', component: CreatePostComponent, useAsDefault: true },	
 ])
 export class ClassifiedApp {
 
