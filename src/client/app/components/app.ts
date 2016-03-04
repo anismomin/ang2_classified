@@ -4,6 +4,7 @@ import {RouteConfig, ROUTER_DIRECTIVES} from 'angular2/router'
 import {HomeComponent} from './home/home.component'
 import {SignInComponent} from './signin/signin.component'
 import {PostsComponent} from './posts/posts.component'
+import {ViewPostComponent} from './viewPost/view.component'
 import {CreatePostComponent} from './createPost/createPost.component'
 import {SignInUpService} from '../services/SignInUpService'
 
@@ -17,7 +18,7 @@ import {SignInUpService} from '../services/SignInUpService'
 	/*{ path: '/', name: 'root', redirectTo: ['CreatePost']},*/
 	{ path: '/home', name: 'Home', component: HomeComponent},
 	{ path: '/posts', name: 'Posts', component: PostsComponent},
-	{ path: '/posts/:id', name: 'Post', component: PostsComponent },
+	{ path: '/posts/:id', name: 'ViewPost', component: ViewPostComponent },
 	{ path: '/posts/create', name: 'CreatePost', component: CreatePostComponent, useAsDefault: true },	
 ])
 export class ClassifiedApp {

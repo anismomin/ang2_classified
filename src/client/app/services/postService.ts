@@ -36,7 +36,13 @@ export class PostService {
 	}
 
 	getpostById(id) {
-		return this.http.get('http://localhost:3000/post/:id')
+		return this.http.get('http://localhost:3000/post/'+id)
+			.map(res => res.json())
+			.delay(1500);
+	}
+
+	deletePost(id) {
+		return this.http.delete('http://localhost:3000/post/' + id)
 			.map(res => res.json())
 			.delay(1500);
 	}

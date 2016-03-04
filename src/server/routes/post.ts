@@ -111,8 +111,9 @@ router.use(methodOverride(function(req, res) {
 
 	Post.findOne({ _id: req.params.id }, (err, docs) => {
 
-		res.json({ success: true, data: docs });
-
+		(err) => res.status(301).json(err);
+		res.status(200).json(docs);	
+		
 	});
 
 })

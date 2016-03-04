@@ -3,6 +3,7 @@ import {Http, Headers, HTTP_PROVIDERS}  from 'angular2/http'
 import {RouterLink}  from 'angular2/router'
 import {PostService} from '../../services/PostService'
 
+import {Post} from '../../models/Post';
 
 @Component({
     templateUrl: 'app/components/posts/posts.html',
@@ -11,7 +12,7 @@ import {PostService} from '../../services/PostService'
 })
 export class PostsComponent {
 
-	posts: Array<any>;
+	posts: Post[];
 
 	constructor(public postService: PostService) {
 		
