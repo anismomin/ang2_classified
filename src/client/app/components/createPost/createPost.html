@@ -34,7 +34,7 @@
 			</div>
 			<div class="fieldset">
 				<label class="images" for="cd-images">Add Images</label>
-				<input type="file" name="images" ngControl="images">
+				<input type="file" name="images" (change)="fileChangeEvent($event)" ngControl="images" multiple>
 				<control-messages control="images"></control-messages>
 		    </div> 
 			<div class="fieldset">

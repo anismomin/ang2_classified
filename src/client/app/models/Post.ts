@@ -15,15 +15,15 @@ export class Post {
     static fromJSON(json: any) {
         if (json) {
             var title: string = json.title || null;
-            var price: number = json.price || null,
+            var price: number = json.price || null;
             var category: string = json.category || null;
             var description: string = json.description || null;
-            var images: {}[] = json.images || null,
+            var images: {}[] = json.images || null;
             var name: string = json.name || null;
-            var phone: string = json.phone || null,
-            var state: string = json.state || null,
-            var city: string = json.city || null,
-            var status: boolean = json.city || false,
+            var phone: string = json.phone || null;
+            var state: string = json.state || null;
+            var city: string = json.city || null;
+            var status: boolean = json.city || false;
 
             return new Post(title, price, category, description, images, name, phone, state, city, status);
         } else {
