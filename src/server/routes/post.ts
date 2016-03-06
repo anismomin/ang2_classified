@@ -3,22 +3,22 @@
 import express = require('express');
 import path = require('path');
 var methodOverride = require('method-override');
-// var multer = require('multer');
-// var crypto = require('crypto');
+var multer = require('multer');
+var crypto = require('crypto');
 var router = express.Router();
 
 import {IUserModel, User} from '../models/user/User';
 import {IPostModel, Post} from '../models/post/Post';
 
-// var storage = multer.diskStorage({
-// 	destination: '../../../uploads/',
-// 	filename: function(req, file, cb) {
-// 		crypto.pseudoRandomBytes(16, function(err, raw) {
-// 			if (err) return cb(err)
-// 			cb(null, raw.toString('hex') + path.extname(file.originalname))
-// 		})
-// 	}
-// });
+var storage = multer.diskStorage({
+	destination: '../../../uploads/',
+	filename: function(req, file, cb) {
+		crypto.pseudoRandomBytes(16, function(err, raw) {
+			if (err) return cb(err)
+			cb(null, raw.toString('hex') + path.extname(file.originalname))
+		})
+	}
+});
 router.use(methodOverride(function(req, res) {
 	if (req.body && typeof req.body === 'object' && '_method' in req.body) {
 		// look in urlencoded POST bodies and delete it
@@ -33,13 +33,17 @@ router.use(methodOverride(function(req, res) {
 		res.status(200).json(docs);					
 	});
 })
+.post("/upload", multer({ dest: "../../../uploads/" }).array("postImg", 12), function(req, res) {
+    res.send(req.files);
+})
 //.post('/create', upload.array('images', 12), (req: express.Request, res: express.Response, next) => {	
 .post('/create',  (req: express.Request, res: express.Response, next) => {
 
 	let b = req.body;
-	//var images = req.files;
+	var images = req.files;
 	var imgArray = [];
-
+	console.log(req.body);
+	//console.log(req.files);
 	// var images = [{
 	// 	path: './images/image.jpg',
 	// 	filename: 'banana'

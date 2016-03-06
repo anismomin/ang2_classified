@@ -16,11 +16,11 @@ export class CreatePostComponent {
 	postForm: ControlGroup;
 	postingResponse: string;
 	postFormProcess = false;
-	filesToUpload: Array<File>;
-
+	filesToUpload: Array<File> = [];
+	 
 
 	constructor(private fb: FormBuilder, private _http: Http, private _postService: PostService) {
-		this.filesToUpload = [];
+		
 		this.postForm = this.fb.group({
 			'title': ['dumytitile', Validators.compose([Validators.required])],
 			'price': ['20', Validators.compose([Validators.required])],
@@ -28,24 +28,30 @@ export class CreatePostComponent {
 			'description': ['Checkout this description', Validators.compose([Validators.required])],
 			'name': ['mynmae', Validators.compose([Validators.required])],
 			'phone': ['03343853136', Validators.compose([Validators.required])],
-			'images': [''],
+			'postImg': [''],
 			'state': ['sindh', Validators.compose([Validators.required])],
 			'city': ['karachi', Validators.compose([Validators.required])]
 		});
 	}
 
 	createPost(postForm) {
-		// let PostData = {
-		// 	title: postForm.title,
-		// 	category: postForm.category,
-		// 	description: postForm.description,
-		// 	name: postForm.name,
-		// 	phone: postForm.phone,
-		// 	images: postForm.images,
-		// 	state: postForm.state,
-		// 	city: postForm.city
-		// };
+	
+		var imagess = this.filesToUpload;
+		let PostData = {
+			title: postForm.title,
+			price: postForm.price,
+			category: postForm.category,
+			description: postForm.description,
+			name: postForm.name,
+			phone: postForm.phone,
+			postImg: imagess,
+			state: postForm.state,
+			city: postForm.city
+		};
+		console.log(imagess);
+		console.log(PostData);
 		let postData = JSON.stringify(postForm);
+		
 		this.postFormProcess = true;
 
 		this._postService.createPost(postForm)
@@ -59,37 +65,48 @@ export class CreatePostComponent {
 			);
 	}
 
-    // upload() {
-    //     this.makeFileRequest("http://localhost:3000/upload", [], this.filesToUpload).then((result) => {
-    //         console.log(result);
-    //     }, (error) => {
-    //         console.error(error);
-    //     });
-    // }
+    upload() {
+		// console.log(this.filesToUpload);
 
-    fileChangeEvent(fileInput: any) {
-        this.filesToUpload = <Array<File>>fileInput.target.files;
-        console.log(this.filesToUpload);
+  //       this.makeFileRequest("http://localhost:3000/post/upload", [], this.filesToUpload).then((result) => {
+  //           console.log(result);
+  //       }, (error) => {
+  //           console.debug(error);
+  //       });
     }
 
-    // makeFileRequest(url: string, params: Array<string>, files: Array<File>) {
-    //     return new Promise((resolve, reject) => {
-    //         var formData: any = new FormData();
-    //         var xhr = new XMLHttpRequest();
-    //         for (var i = 0; i < files.length; i++) {
-    //             formData.append("uploads[]", files[i], files[i].name);
-    //         }
-    //         xhr.onreadystatechange = function() {
-    //             if (xhr.readyState == 4) {
-    //                 if (xhr.status == 200) {
-    //                     resolve(JSON.parse(xhr.response));
-    //                 } else {
-    //                     reject(xhr.response);
-    //                 }
-    //             }
-    //         }
-    //         xhr.open("POST", url, true);
-    //         xhr.send(formData);
-    //     });
-    // }
+    fileChangeEvent($event) {
+		var inputValue = $event.target;
+		
+		if (null == inputValue || null == inputValue.files[0]) { 
+			console.debug("Input file error.");
+			return; 
+		}	
+
+		Object.keys(inputValue.files).forEach((key) => {
+			this.filesToUpload.push(inputValue.files[key]);
+			console.debug("Input File name: " + inputValue.files[key].name + " type:" + inputValue.files[key].size + " size:" + inputValue.files[key].size);
+		});
+    }
+
+    makeFileRequest(url: string, params: Array<string>, files: Array<File>) {
+        return new Promise((resolve, reject) => {
+            var formData: any = new FormData();
+            var xhr = new XMLHttpRequest();
+            for (var i = 0; i < files.length; i++) {
+                formData.append("uploads[]", files[i], files[i].name);
+            }
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState == 4) {
+                    if (xhr.status == 200) {
+                        resolve(JSON.parse(xhr.response));
+                    } else {
+                        reject(xhr.response);
+                    }
+                }
+            }
+            xhr.open("POST", url, true);
+            xhr.send(formData);
+        });
+    }
 }

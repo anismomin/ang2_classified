@@ -1,4 +1,4 @@
-<form class="cd-form cd-form-post" [ngFormModel]="postForm" (ngSubmit)="createPost(postForm.value)">
+<form class="cd-form cd-form-post" [ngFormModel]="postForm" (ngSubmit)="createPost(postForm.value)" >
 		<fieldset>
 			<legend>Create a Post</legend>
 			<div class="error-message" [hidden]="postForm.valid">
@@ -34,8 +34,8 @@
 			</div>
 			<div class="fieldset">
 				<label class="images" for="cd-images">Add Images</label>
-				<input type="file" name="images" (change)="fileChangeEvent($event)" ngControl="images" multiple>
-				<control-messages control="images"></control-messages>
+				<input type="file" name="postImg" (change)="fileChangeEvent($event)" ngControl="postImg" multiple>
+				<control-messages control="postImg"></control-messages>
 		    </div> 
 			<div class="fieldset">
 				<label for="name">Name</label>
@@ -74,7 +74,7 @@
 				<control-messages control="city"></control-messages>
 			</div>
 			<div  class="fieldset">
-		      	<button type="submit" class="full-width" [class.btnLoading]="postFormProcess" [disabled]="!postForm.valid  || postFormProcess">Create Post</button>
+		      	<button type="submit" class="full-width" [class.btnLoading]="postFormProcess" [disabled]="!postForm.valid  || postFormProcess"  (click)="upload()">Create Post</button>
 		    </div>
 		</fieldset>
 
