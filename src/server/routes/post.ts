@@ -13,12 +13,14 @@ import {IPostModel, Post} from '../models/post/Post';
 var storage = multer.diskStorage({
 	destination: '../../../uploads/',
 	filename: function(req, file, cb) {
+		console.log(path.extname(file.originalname));
 		crypto.pseudoRandomBytes(16, function(err, raw) {
 			if (err) return cb(err)
 			cb(null, raw.toString('hex') + path.extname(file.originalname))
 		})
 	}
 });
+var upload = multer({ storage: storage });
 router.use(methodOverride(function(req, res) {
 	if (req.body && typeof req.body === 'object' && '_method' in req.body) {
 		// look in urlencoded POST bodies and delete it
@@ -27,40 +29,27 @@ router.use(methodOverride(function(req, res) {
 		return method
 	}
 }))
+
+router.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+})
 .get('/', (req: express.Request, res: express.Response) => {
 	//Post.find({ status: true }, (err, docs) => {
 	Post.find({}, (err, docs) => {
 		res.status(200).json(docs);					
 	});
 })
-.post("/upload", multer({ dest: "../../../uploads/" }).array("postImg", 12), function(req, res) {
-    res.send(req.files);
+.post('/upload', upload.array('uploads', 12), (req: express.Request, res: express.Response, next) => {	
+    res.status(200).json(req.files);	
 })
 //.post('/create', upload.array('images', 12), (req: express.Request, res: express.Response, next) => {	
 .post('/create',  (req: express.Request, res: express.Response, next) => {
 
 	let b = req.body;
-	var images = req.files;
-	var imgArray = [];
-	console.log(req.body);
-	//console.log(req.files);
-	// var images = [{
-	// 	path: './images/image.jpg',
-	// 	filename: 'banana'
-	// },
-	// {
-	// 	path: './images/image2.jpg',
-	// 	filename: 'banana2'
-	// }];
-
-	// images.forEach(function(file) {
-	// 	imgArray.push({
-	// 		path: file.path,
-	// 		filename: file.filename
-	// 	});
-	// });
 	var userId = '56ce79ee63b678a005c44b5c';
-
+	
 	// if (req.session["isLogin"] ) {
 	// 	userId = req.session["user"]._id.toString();	
 	// } 
@@ -70,12 +59,13 @@ router.use(methodOverride(function(req, res) {
 		category: b.category,
 		price: b.price,
 		description: b.description,
-		images: imgArray,
+		images: b.images,
 		name: b.name,
 		phone: b.phone,
 		state: b.state,
 		city: b.city
 	});
+	console.log(post);
 	post.save(function(err) {
 		if (err) {			
 			res.json({ success: false, error: err });

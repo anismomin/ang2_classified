@@ -20,8 +20,8 @@ import {UploadComonent} from './uploads/upload.component'
 	{ path: '/home', name: 'Home', component: HomeComponent},
 	{ path: '/posts', name: 'Posts', component: PostsComponent},
 	{ path: '/posts/:id', name: 'ViewPost', component: ViewPostComponent },
-	{ path: '/posts/create', name: 'CreatePost', component: CreatePostComponent},
-	{ path: '/uploads', name: 'Upload', component: UploadComonent, useAsDefault: true },	
+	{ path: '/posts/create', name: 'CreatePost', component: CreatePostComponent, useAsDefault: true },
+	//{ path: '/uploads', name: 'Upload', component: UploadComonent},	
 ])
 export class ClassifiedApp {
 
