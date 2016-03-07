@@ -7,6 +7,7 @@ import {PostsComponent} from './posts/posts.component'
 import {ViewPostComponent} from './viewPost/view.component'
 import {CreatePostComponent} from './createPost/createPost.component'
 import {SignInUpService} from '../services/SignInUpService'
+import {UploadComonent} from './uploads/upload.component'
 
 @Component({
     selector: 'clasified',
@@ -19,7 +20,8 @@ import {SignInUpService} from '../services/SignInUpService'
 	{ path: '/home', name: 'Home', component: HomeComponent},
 	{ path: '/posts', name: 'Posts', component: PostsComponent},
 	{ path: '/posts/:id', name: 'ViewPost', component: ViewPostComponent },
-	{ path: '/posts/create', name: 'CreatePost', component: CreatePostComponent, useAsDefault: true },	
+	{ path: '/posts/create', name: 'CreatePost', component: CreatePostComponent},
+	{ path: '/uploads', name: 'Upload', component: UploadComonent, useAsDefault: true },	
 ])
 export class ClassifiedApp {
 
