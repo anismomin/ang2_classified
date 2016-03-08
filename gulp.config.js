@@ -4,6 +4,7 @@ module.exports = function() {
 		
 		clientConf: './src/client/app/tsconfig.json',
 		client: './src/client/',
+		
 		clientTs: './src/client/app/**/**/*.ts',
 		clientHtml: './src/client/app/**/*.html',
 		clientImages: ['./src/client/assets/images/**/*.jpeg','./src/client/assets/images/**/*.jpg', './src/client/assets/images/**/*.png'],
@@ -25,7 +26,7 @@ module.exports = function() {
 		scss: './built/client/assets/css/',
 		compScss: './built/client/app/',
 		jsLibs: './built/client/assets/js/',		
-
+		uploads: './built/client/uploads',
 		builtServer: './built/server/',
 
 		indexPage: 'src/client/index.html'

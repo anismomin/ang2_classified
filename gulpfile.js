@@ -179,6 +179,7 @@ gulp.task('build_img', function () {
         .pipe(gulp.dest(config.images));
 });
 
+
 gulp.task('build_svg_img', function () {
     return gulp.src(config.clientSvgImages)
         .pipe(gulp.dest(config.images));
@@ -208,8 +209,12 @@ gulp.task('serve', ['nodemon', 'ts_lint', 'build_index', 'build_app'], function(
 */
 
 gulp.task('delete_build', function(){
-    return del(config.built)
+    del([config.builtClient, config.builtApp, config.built+'index.html', !config.uploads]).then(paths => {
+        console.log('Deleted files and folders:\n', paths.join('\n'));
+    });
 });
+
+
 
 gulp.task('clean_build', function(callback){
     runSequence('delete_build', 'build_server', 'build_sass', 'build_comp_sass', 'build_html', 'build_img', 'build_svg_img', 'copy_js', 'serve', callback);

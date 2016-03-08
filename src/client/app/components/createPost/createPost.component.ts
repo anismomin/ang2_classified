@@ -37,7 +37,6 @@ export class CreatePostComponent {
 	createPost(postForm) {
 
 		this.upload((images) => {
-			
 			var postData = {
 				title: postForm.title,
 				price: postForm.price,
@@ -51,8 +50,8 @@ export class CreatePostComponent {
 			};
 			
 			this.postFormProcess = true;
-
-			this._postService.createPost(JSON.stringify(postData))
+			//JSON.stringify(postData)
+			this._postService.createPost(postData)
 				.subscribe(
 				data => this.postingResponse = JSON.stringify(data),
 				error => console.log(error),
@@ -62,20 +61,17 @@ export class CreatePostComponent {
 				}
 				);
 		});
-		
-			
-		
-		
+
 	}
 
     upload(cb) {
-		//console.log(this.filesToUpload);
         this.makeFileRequest("http://localhost:3000/post/upload", [], this.filesToUpload)
         .then((result) => {
 			var img = [];
-			Object.keys(result).forEach((key) => {			
-				img.push({ path: result[key].path });
-				console.debug("Input File name: " + result[key].name + " type:" + result[key].size + " size:" + result[key].size);
+			Object.keys(result).forEach((key) => {	
+				var res = result[key].path.split("client");		
+				img.push({ path: res[1] });
+				//console.debug("Input File name: " + result[key].name + " type:" + result[key].size + " size:" + result[key].size);
 			});
 			cb(img);
         }, (error) => {
@@ -86,19 +82,6 @@ export class CreatePostComponent {
 	fileChangeEvent(fileInput: any) {
         this.filesToUpload = fileInput.target.files;
     }
-  //   fileChangeEvent($event) {
-		// var inputValue = $event.target;
-		
-		// if (null == inputValue || null == inputValue.files[0]) { 
-		// 	console.debug("Input file error.");
-		// 	return; 
-		// }	
-
-		// Object.keys(inputValue.files).forEach((key) => {
-		// 	this.filesToUpload.push(inputValue.files[key]);
-		// 	console.debug("Input File name: " + inputValue.files[key].name + " type:" + inputValue.files[key].size + " size:" + inputValue.files[key].size);
-		// });
-  //   }
 
     makeFileRequest(url: string, params: Array<string>, files: Array<File>) {
 
@@ -117,11 +100,8 @@ export class CreatePostComponent {
                     }
                 }
             }
-
             xhr.open("POST", url, true);
             xhr.send(formData);
-
-           
         });
     }
 }

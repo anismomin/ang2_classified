@@ -4,20 +4,15 @@ import express = require('express');
 import path = require('path');
 var methodOverride = require('method-override');
 var multer = require('multer');
-var crypto = require('crypto');
 var router = express.Router();
 
 import {IUserModel, User} from '../models/user/User';
 import {IPostModel, Post} from '../models/post/Post';
 
 var storage = multer.diskStorage({
-	destination: '../../../uploads/',
+	destination: './built/client/uploads/',
 	filename: function(req, file, cb) {
-		console.log(path.extname(file.originalname));
-		crypto.pseudoRandomBytes(16, function(err, raw) {
-			if (err) return cb(err)
-			cb(null, raw.toString('hex') + path.extname(file.originalname))
-		})
+        cb(null, (Math.random().toString(36) + '00000000000000000').slice(2, 10) + Date.now() + path.extname(file.originalname));
 	}
 });
 var upload = multer({ storage: storage });
@@ -46,7 +41,7 @@ router.use(function(req, res, next) {
 })
 //.post('/create', upload.array('images', 12), (req: express.Request, res: express.Response, next) => {	
 .post('/create',  (req: express.Request, res: express.Response, next) => {
-
+	console.log(req.body);
 	let b = req.body;
 	var userId = '56ce79ee63b678a005c44b5c';
 	

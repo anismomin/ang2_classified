@@ -14,7 +14,6 @@ var express = require('express'),
     bodyParser = require('body-parser'),
     expressSession = require('express-session'),
     mongoose = require('mongoose'),
-    hash = require('bcrypt-nodejs'),
     path = require('path'),
     http = require('http'),
     passport = require('passport'),
@@ -36,7 +35,7 @@ var post = require('./routes/post.js');
 
 // define middleware
 app.use(express.static(path.join(__dirname, '/../client')));
-app.use(express.static(path.join(__dirname, '/../uploads')));
+//app.use(express.static(path.join(__dirname, '/../../uploads')));
 app.use('/favicon.ico', express.static(path.join(__dirname, '/../client/assets/images/favicon.ico')))
 
 app.use(logger('dev'));
