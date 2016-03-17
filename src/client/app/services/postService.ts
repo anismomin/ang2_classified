@@ -46,4 +46,11 @@ export class PostService {
 			.map(res => res.json())
 			.delay(1500);
 	}
+	
+	editPost(id) {
+		return this.http.delete('http://localhost:3000/post/' + id)
+			.map(res => res.json())
+			.delay(1500);
+	}
+
 }
