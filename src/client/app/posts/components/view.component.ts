@@ -1,11 +1,11 @@
 import {Component} from 'angular2/core'
 import {RouteParams} from 'angular2/router'
-import {PostService} from '../../services/postService'
-import {Post} from '../../models/Post';
+import {PostService} from '../../posts/postService'
+import {Post} from '../../posts/Post';
 
 
 @Component({
-    templateUrl: 'app/components/viewPost/view.html',
+    templateUrl: 'app/post/components/view.html',
     providers: [PostService]
 })
 export class ViewPostComponent {

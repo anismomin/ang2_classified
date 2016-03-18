@@ -10,7 +10,7 @@ import 'rxjs/add/operator/retry';
 import 'rxjs/add/operator/timeout';
 
 @Injectable()
-export class SignInUpService {
+export class AccountsService {
 
 	public postResponse;
 

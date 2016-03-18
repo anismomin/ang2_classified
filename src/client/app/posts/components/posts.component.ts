@@ -1,12 +1,12 @@
 import {Component, EventEmitter} from 'angular2/core'
 import {Http, Headers, HTTP_PROVIDERS}  from 'angular2/http'
 import {RouterLink}  from 'angular2/router'
-import {PostService} from '../../services/PostService'
+import {PostService} from '../../posts/PostService'
 
-import {Post} from '../../models/Post';
+import {Post} from '../../posts/Post';
 
 @Component({
-    templateUrl: 'app/components/posts/posts.html',
+    templateUrl: 'app/posts/templates/posts.html',
     directives: [RouterLink],
     providers: [PostService],
     styles: [`

@@ -4,12 +4,12 @@ import {ControlGroup, FormBuilder, Validators, FORM_DIRECTIVES} from 'angular2/c
 
 import { Router } from 'angular2/router'
 
-import {ControlMessages} from '../controlMessage/control-messages.component'
-import {ValidationService} from '../../services/validationService'
-import {PostService} from '../../services/postService'
+import {ControlMessages} from '../../shared/components/control-messages.component'
+import {ValidationService} from '../../shared/services/validationService'
+import {PostService} from '../../posts/postService'
 
 @Component({
-    templateUrl: 'app/components/createPost/createPost.html',
+    templateUrl: 'app/posts/templates/create.html',
     directives: [FORM_DIRECTIVES, ControlMessages],
     providers: [PostService, ValidationService]
 })
