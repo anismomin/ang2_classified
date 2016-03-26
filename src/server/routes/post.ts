@@ -137,31 +137,14 @@ router.use(function(req, res, next) {
 		city: b.city,
 	},
 	(err, post) => {
-
-		res.json({ success: true, message: 'Successfully Update Post', data: post });		
-		//res.redirect(req.params.post_id);
+		res.status(200).json({message: 'Successfully Update Post', data: post });		
 	});
 
 })
 .delete('/:post_id', (req, res) => {
 
-	var b = req.body;
-	Post.update(
-	{
-		_id: req.params.post_id
-	},
-	{
-		title: b.title,
-		category: b.category,
-		price: b.price,
-		description: b.description,
-		name: b.name,
-		phone: b.phone,
-		state: b.state,
-		city: b.city,
-	},
-	(err, post) => {
-		res.json({ success: true, message: 'Successfully Deleted the Post.'});
+	Post.remove({ _id: req.params.post_id }, () => {
+		res.status(200).json({ message: 'Successfully deleted' });
 	});
 
 });

@@ -2,12 +2,14 @@ import {Component, EventEmitter} from 'angular2/core'
 import {Http, Headers, HTTP_PROVIDERS}  from 'angular2/http'
 import {ControlGroup, FormBuilder, Validators, FORM_DIRECTIVES} from 'angular2/common'
 
-import {ControlMessages} from '../controlMessage/control-messages.component'
-import {ValidationService} from '../../services/validationService'
-import {PostService} from '../../services/postService'
+import { Router } from 'angular2/router'
+
+import {ControlMessages} from '../../shared/components/control-messages.component'
+import {ValidationService} from '../../shared/services/validationService'
+import {PostService} from '../../posts/postService'
 
 @Component({
-    templateUrl: 'app/components/createPost/createPost.html',
+    templateUrl: 'app/posts/templates/create.html',
     directives: [FORM_DIRECTIVES, ControlMessages],
     providers: [PostService, ValidationService]
 })
@@ -19,7 +21,7 @@ export class CreatePostComponent {
 	filesToUpload : any;
 	
 
-	constructor(private fb: FormBuilder, private _http: Http, private _postService: PostService) {
+	constructor(private fb: FormBuilder, private _http: Http, private _postService: PostService, private _router :Router) {
 		
 		this.postForm = this.fb.group({
 			'title': ['dumytitile', Validators.compose([Validators.required])],
@@ -58,6 +60,7 @@ export class CreatePostComponent {
 				() => {
 					this.postFormProcess = false;
 					console.log(this.postingResponse);
+					this._router.navigate(['Posts']);
 				}
 				);
 		});

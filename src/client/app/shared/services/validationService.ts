@@ -1,3 +1,5 @@
+import {Observable} from 'rxjs/Observable';
+
 interface ValidationResult {
     [key: string]: boolean;
 }

@@ -4,7 +4,12 @@
   "description": "angular 2 and expressjs workflow with gulp, browser-sync.",
   "main": "gulpfile.js",
   "scripts": {
+<<<<<<< HEAD
     "start": "node built/server/server.js"
+=======
+    "start": "gulp",
+     "typings": "typings"
+>>>>>>> 63a26d6ee5fcdb6657286f13f5e2146420aeb065
   },
   "repository": {
     "type": "git",
@@ -28,25 +33,26 @@
     "gulp-tslint": "^3.2.0",
     "gulp-typescript": "^2.10.0",
     "path": "^0.12.7",
-    "run-sequence": "^1.1.5"
+    "run-sequence": "^1.1.5",
+    "typings":"^0.7.5"
   },
   "dependencies": {
-    "angular2": "2.0.0-beta.0",
+    "angular2": "2.0.0-beta.9",
+    "systemjs": "0.19.24",
+    "es6-promise": "^3.0.2",
+    "es6-shim": "^0.35.0",
+    "reflect-metadata": "0.1.2",
+    "rxjs": "5.0.0-beta.2",
+    "zone.js": "0.5.15",
     "body-parser": "^1.8.4",
     "cookie-parser": "^1.3.5",
     "debug": "^2.0.0",
-    "es6-promise": "^3.0.2",
-    "es6-shim": "^0.33.3",
     "express": "^4.9.8",
     "express-session": "^1.11.2",
     "mongoose": "^4.0.4",
     "morgan": "^1.3.2",
     "passport": "^0.2.1",
     "passport-local": "^1.0.0",
-    "passport-local-mongoose": "^1.0.0",
-    "reflect-metadata": "^0.1.2",
-    "rxjs": "5.0.0-beta.0",
-    "systemjs": "0.19.20",
-    "zone.js": "^0.5.10"
+    "passport-local-mongoose": "^1.0.0"
   }
 }
