@@ -4,7 +4,7 @@
   "description": "angular 2 and expressjs workflow with gulp, browser-sync.",
   "main": "gulpfile.js",
   "scripts": {
-    "start": "node built/server/server.js",
+    "start": "gulp",
     "typings": "typings"
   },
   "repository": {
