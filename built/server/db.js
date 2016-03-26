@@ -1,0 +1,16 @@
+/// <reference path='../typings/tsd.d.ts' />
+var mongoose = require('mongoose');
+mongoose.connect('mongodb://localhost:27017/ang2_olx');
+/**
+* Mngoose Server Connection
+* @param {String,}),Users = mongoose.model('Users', UserSchema);app.use(function(req, res, next) {	var err = new Error('Page Not Found'} 'mongodb [description]
+*/
+var db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', function (callback) {
+    console.log('database connect Successfully');
+});
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = mongoose;
+
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImRiLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLDRDQUE0QztBQUU1QyxJQUFPLFFBQVEsV0FBVyxVQUFVLENBQUMsQ0FBQztBQUV0QyxRQUFRLENBQUMsT0FBTyxDQUFDLG9DQUFvQyxDQUFDLENBQUM7QUFFdkQ7OztFQUdFO0FBRUYsSUFBSSxFQUFFLEdBQUcsUUFBUSxDQUFDLFVBQVUsQ0FBQztBQUM3QixFQUFFLENBQUMsRUFBRSxDQUFDLE9BQU8sRUFBRSxPQUFPLENBQUMsS0FBSyxDQUFDLElBQUksQ0FBQyxPQUFPLEVBQUUsbUJBQW1CLENBQUMsQ0FBQyxDQUFDO0FBQ2pFLEVBQUUsQ0FBQyxJQUFJLENBQUMsTUFBTSxFQUFFLFVBQVMsUUFBUTtJQUNoQyxPQUFPLENBQUMsR0FBRyxDQUFDLCtCQUErQixDQUFDLENBQUM7QUFDOUMsQ0FBQyxDQUFDLENBQUM7QUFFSDtrQkFBZSxRQUFRLENBQUMiLCJmaWxlIjoiZGIuanMiLCJzb3VyY2VzQ29udGVudCI6WyIvLy8gPHJlZmVyZW5jZSBwYXRoPScuLi90eXBpbmdzL3RzZC5kLnRzJyAvPlxuXG5pbXBvcnQgbW9uZ29vc2UgPSByZXF1aXJlKCdtb25nb29zZScpO1xuXG5tb25nb29zZS5jb25uZWN0KCdtb25nb2RiOi8vbG9jYWxob3N0OjI3MDE3L2FuZzJfb2x4Jyk7XG5cbi8qKlxuKiBNbmdvb3NlIFNlcnZlciBDb25uZWN0aW9uXG4qIEBwYXJhbSB7U3RyaW5nLH0pLFVzZXJzID0gbW9uZ29vc2UubW9kZWwoJ1VzZXJzJywgVXNlclNjaGVtYSk7YXBwLnVzZShmdW5jdGlvbihyZXEsIHJlcywgbmV4dCkge1x0dmFyIGVyciA9IG5ldyBFcnJvcignUGFnZSBOb3QgRm91bmQnfSAnbW9uZ29kYiBbZGVzY3JpcHRpb25dXG4qL1xuXG52YXIgZGIgPSBtb25nb29zZS5jb25uZWN0aW9uO1xuZGIub24oJ2Vycm9yJywgY29uc29sZS5lcnJvci5iaW5kKGNvbnNvbGUsICdjb25uZWN0aW9uIGVycm9yOicpKTtcbmRiLm9uY2UoJ29wZW4nLCBmdW5jdGlvbihjYWxsYmFjaykge1xuXHRjb25zb2xlLmxvZygnZGF0YWJhc2UgY29ubmVjdCBTdWNjZXNzZnVsbHknKTtcbn0pO1xuXG5leHBvcnQgZGVmYXVsdCBtb25nb29zZTsiXSwic291cmNlUm9vdCI6Ii9zb3VyY2UvIn0=
