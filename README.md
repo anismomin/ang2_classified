@@ -7,4 +7,4 @@ Run the following commands to run the application
 	
 Deply On Heroku
 
-	[![Deploy on Heroku](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
