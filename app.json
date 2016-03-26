@@ -1,0 +1,11 @@
+{
+  "name": "Angular 2 classified",
+  "description": "The Classified for a Node.JS Express App",
+  "keywords": [
+    "nodejs",
+    "express"
+  ],
+  "website": "http://www.anismomin.com",
+  "repository": "https://github.com/anismomin/ang2_classified.git",
+  "logo": "https://nodejs.org/images/logos/nodejs.png"
+}
