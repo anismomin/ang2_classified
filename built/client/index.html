@@ -38,6 +38,11 @@
                     defaultExtension: 'js'
                 }
             },
+            map: {
+                '@angular2-material/core': 'node_modules/@angular2-material/core',
+                '@angular2-material/checkbox': 'node_modules/@angular2-material/checkbox',
+                '@angular2-material/button':'node_modules/@angular2-material/button',
+            }
         });
         System.import('app/boot')
                 .then(null, console.error.bind(console));
