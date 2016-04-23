@@ -1,11 +1,11 @@
 {
-  "name": "angular2_seed",
+  "name": "classified",
   "version": "1.0.0",
   "description": "angular 2 and expressjs workflow with gulp, browser-sync.",
   "main": "gulpfile.js",
   "scripts": {
     "start": "concurrently \"gulp watch\" \"node ./built/server/server.js\" ",
-    "postinstall": "gulp"
+    "postinstall": "gulp local"
   },
   "repository": {
     "type": "git",

@@ -225,10 +225,10 @@ gulp.task('clean_build', function(callback){
 */
 
 gulp.task('local', ['clean_build', 'delete_junk_files'], function () {
-    gulp.watch(config.clientTs,   ['build_app', browserSync.reload]);
+    gulp.watch(config.clientTs,   ['build_app']);
     gulp.watch(config.clientScss,  ['build_sass']);
     gulp.watch(config.clientCompScss,  ['build_comp_sass']);
-    gulp.watch(config.clientHtml, ['build_html','bs_reload']);
+    gulp.watch(config.clientHtml, ['build_html']);
 });
 
 // compile each time when we change something in /src folder
