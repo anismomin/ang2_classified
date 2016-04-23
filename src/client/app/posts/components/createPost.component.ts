@@ -3,7 +3,6 @@ import {Http, Headers, HTTP_PROVIDERS}  from 'angular2/http'
 import {ControlGroup, FormBuilder, Validators, FORM_DIRECTIVES} from 'angular2/common'
 
 import { Router } from 'angular2/router'
-import { MdButton } from '@angular2-material/button'
 
 import {ControlMessages} from '../../shared/components/control-messages.component'
 import {ValidationService} from '../../shared/services/validationService'
