@@ -8,6 +8,7 @@ module.exports = function() {
 		clientTs: './src/client/app/**/**/*.ts',
 		clientHtml: './src/client/app/**/*.html',
 		clientImages: ['./src/client/assets/images/**/*.jpeg','./src/client/assets/images/**/*.jpg', './src/client/assets/images/**/*.png'],
+		favicon: './src/client/favicon.ico',
 		clientSvgImages: './src/client/assets/images/**/*.svg',
 		clientScss: ['./src/client/assets/scss/**/*.scss', './src/client/assets/partials/*.scss'],
 		clientCompScss: './src/client/app/**/**/*.scss',
