@@ -4,15 +4,11 @@
   "description": "angular 2 and expressjs workflow with gulp, browser-sync.",
   "main": "gulpfile.js",
   "scripts": {
-    "start": "concurrently \"gulp watch\" \"node ./built/server/server.js\" ",
-    "postinstall": "gulp local"
+    "start": "concurrently \"gulp watch\" \"node ./built/server/server.js\" "
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/anismomin/ang2_classified.git"
-  },
-  "engines": {
-    "node": "0.12.7"
   },
   "author": "Anis Momin",
   "license": "MIT",
